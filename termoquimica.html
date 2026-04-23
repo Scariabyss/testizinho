@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- / Cabeçalho com metadados e metatags -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Termoquímica — Mollab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <!-- / Topo da página com navegação -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="home.html" class="logo">
+                <span class="logo-text">Mollab</span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="home.html">Início</a>
+                <a href="disciplinas.html" class="active">Disciplinas</a>
+                <a href="experimentos.html">Experimentos</a>
+                <a href="sobre.html">Sobre</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon" id="theme-toggle" aria-label="Alternar Tema">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    
+
+    <!-- / Hero da página explicando o tema -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Termoquímica</h1>
+            <p>O estudo do calor envolvido nas reações químicas e nas trocas de estado físico.</p>
+        </div>
+    </section>
+
+    <!-- / Bloco de conteúdo sobre calor, entalpia e tipos de reação -->
+    <section class="container">
+        <div class="demo-block">
+            <div class="demo-header">
+                <h2>Calor e Reação</h2>
+                <p>Aprenda a calcular a entalpia e entenda a diferença entre processos que absorvem ou liberam energia.
+                </p>
+            </div>
+
+            <div class="demo-body">
+                <div class="demo-content">
+                    <div class="concept-section">
+                        <h3>Entalpia (H)</h3>
+                        <p>Reações <strong>Exotérmicas</strong> liberam calor para o ambiente (ΔH < 0), enquanto reações
+                                <strong>Endotérmicas</strong> absorvem energia (ΔH > 0). A Entalpia de Formação e a Lei
+                                de Hess são ferramentas cruciais para esses cálculos.</p>
+                    </div>
+
+                    <!-- / Local onde o quiz será carregado dinamicamente -->
+                    <div class="quiz-box" id="quiz"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- / Rodapé padrão da disciplina -->
+    <footer class="footer footer-centered">
+        <div class="container footer-bottom">
+            © 2026 Mollab.
+        </div>
+    </footer>
+
+    <script>
+        /* / Banco de perguntas específico para Termoquímica */
+        window.quizQuestions = [
+            {
+                text: "Uma reação que libera calor para o ambiente é chamada de:",
+                options: [
+                    { letter: "A", text: "Endotérmica" },
+                    { letter: "B", text: "Isotérmica" },
+                    { letter: "C", text: "Exotérmica" },
+                    { letter: "D", text: "Adiabática" }
+                ],
+                correct: 2,
+                explanation: "Processos exotérmicos liberam energia térmica, resultando em um aumento da temperatura ao redor."
+            },
+            {
+                text: "O que significa um ΔH negativo?",
+                options: [
+                    { letter: "A", text: "Absorção de calor" },
+                    { letter: "B", text: "Liberação de calor" },
+                    { letter: "C", text: "Reação impossível" },
+                    { letter: "D", text: "Temperatura constante" }
+                ],
+                correct: 1,
+                explanation: "ΔH < 0 indica que o sistema perdeu energia, logo a reação é exotérmica."
+            },
+            {
+                text: "A combustão da madeira é um exemplo de processo:",
+                options: [
+                    { letter: "A", text: "Endotérmico" },
+                    { letter: "B", text: "Exotérmico" },
+                    { letter: "C", text: "Neutro" },
+                    { letter: "D", text: "Isolante" }
+                ],
+                correct: 1,
+                explanation: "Toda combustão (queima) libera grande quantidade de energia, sendo um clássico exemplo exotérmico."
+            },
+            {
+                text: "A Lei de Hess afirma que:",
+                options: [
+                    { letter: "A", text: "A entalpia depende do caminho da reação" },
+                    { letter: "B", text: "A variação de entalpia depende apenas dos estados inicial e final" },
+                    { letter: "C", text: "Reações endotérmicas não seguem leis" },
+                    { letter: "D", text: "A entalpia é sempre positiva" }
+                ],
+                correct: 1,
+                explanation: "A Lei de Hess diz que a variação de entalpia de uma reação depende apenas do estado inicial e final, não do caminho percorrido."
+            },
+            {
+                text: "A fotossíntese é um processo endotérmico ou exotérmico?",
+                options: [
+                    { letter: "A", text: "Exotérmico, pois libera oxigênio" },
+                    { letter: "B", text: "Endotérmico, pois absorve energia luminosa" },
+                    { letter: "C", text: "Nem um nem outro" },
+                    { letter: "D", text: "Depende da planta" }
+                ],
+                correct: 1,
+                explanation: "A fotossíntese absorve energia da luz solar para converter CO₂ e H₂O em glicose e O₂. É um processo endotérmico (ΔH > 0)."
+            },
+            {
+                text: "A entalpia de formação padrão de uma substância simples no seu estado mais estável é:",
+                options: [
+                    { letter: "A", text: "Sempre positiva" },
+                    { letter: "B", text: "Sempre negativa" },
+                    { letter: "C", text: "Igual a zero" },
+                    { letter: "D", text: "Impossível de calcular" }
+                ],
+                correct: 2,
+                explanation: "Por convenção, a entalpia de formação de substâncias simples em seu estado padrão (25°C, 1 atm) é zero."
+            },
+            {
+                text: "A unidade de medida mais comum para entalpia é:",
+                options: [
+                    { letter: "A", text: "Watts (W)" },
+                    { letter: "B", text: "Quilojoules por mol (kJ/mol)" },
+                    { letter: "C", text: "Graus Celsius (°C)" },
+                    { letter: "D", text: "Mols por litro (mol/L)" }
+                ],
+                correct: 1,
+                explanation: "A entalpia é medida em kJ/mol (quilojoules por mol). Essa unidade indica a quantidade de energia por mol de substância."
+            },
+            {
+                text: "Qual a diferença entre calor e temperatura?",
+                options: [
+                    { letter: "A", text: "São a mesma coisa" },
+                    { letter: "B", text: "Calor é energia em trânsito; temperatura é a medida da agitação molecular" },
+                    { letter: "C", text: "Temperatura é energia e calor é agitação" },
+                    { letter: "D", text: "Calor só existe no vácuo" }
+                ],
+                correct: 1,
+                explanation: "Calor é energia transferida entre corpos com temperaturas diferentes. Temperatura mede o grau de agitação das moléculas."
+            },
+            {
+                text: "A dissolução de hidróxido de sódio (NaOH) em água é um processo:",
+                options: [
+                    { letter: "A", text: "Endotérmico, a solução esfria" },
+                    { letter: "B", text: "Exotérmico, a solução esquenta" },
+                    { letter: "C", text: "Neutro, sem variação de temperatura" },
+                    { letter: "D", text: "Impossível de determinar" }
+                ],
+                correct: 1,
+                explanation: "A dissolução de NaOH em água é fortemente exotérmica — a solução esquenta visivelmente ao dissolver."
+            },
+            {
+                text: "A energia de ativação é:",
+                options: [
+                    { letter: "A", text: "A energia liberada pelo produto" },
+                    { letter: "B", text: "A energia mínima para que a reação se inicie" },
+                    { letter: "C", text: "A energia do estado final" },
+                    { letter: "D", text: "A energia cinética das moléculas" }
+                ],
+                correct: 1,
+                explanation: "A energia de ativação (Ea) é a barreira energética mínima que os reagentes precisam superar para que a reação química ocorra."
+            }
+        ];
+    </script>
+
+    <!-- / Carregamento dos scripts base e lógica do Mollab -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+</html>
+
+
+
+

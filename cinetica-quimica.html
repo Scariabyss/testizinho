@@ -1,0 +1,220 @@
+<html>
+<html >
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cinética Química — Mollab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <!-- / Topo com navegação padrão -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="home.html" class="logo">
+                <span class="logo-text">Mollab</span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="home.html">Início</a>
+                <a href="disciplinas.html" class="active">Disciplinas</a>
+                <a href="experimentos.html">Experimentos</a>
+                <a href="sobre.html">Sobre</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon" id="theme-toggle" aria-label="Alternar Tema">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    
+
+    <!-- / Hero: Título da disciplina -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Cinética Química</h1>
+            <p>Descubra o que torna as reações rápidas ou lentas e o papel fundamental dos catalisadores.</p>
+        </div>
+    </section>
+
+    <!-- / Conteúdo da aula e seção de Quiz -->
+    <section class="container">
+        <div class="demo-block">
+            <div class="demo-header">
+                <h2>Teoria das Colisões</h2>
+                <p>Para uma reação ocorrer, as moléculas devem colidir com energia mínima (Energia de Ativação) e
+                    orientação correta.</p>
+            </div>
+
+            <div class="demo-body">
+                <div class="demo-content">
+                    <div class="concept-section">
+                        <h3>Velocidade de Reação</h3>
+                        <p>Fatores como <strong>Concentração</strong>, <strong>Temperatura</strong>,
+                            <strong>Pressão</strong> e <strong>Área de Superfície</strong> podem acelerar as colisões.
+                            Os <strong>Catalisadores</strong> aumentam a velocidade diminuindo a energia de ativação
+                            necessária.</p>
+                    </div>
+
+                    <!-- / Local onde o quiz será renderizado pelo script.js -->
+                    <div class="quiz-box" id="quiz"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- / Rodapé padrão -->
+    <footer class="footer footer-centered">
+        <div class="container footer-bottom">
+            © 2026 Mollab.
+        </div>
+    </footer>
+
+    <script>
+        /* / Banco de perguntas específico para Cinética Química */
+        window.quizQuestions = [
+            {
+                text: "O que um catalisador faz em uma reação química?",
+                options: [
+                    { letter: "A", text: "Aumenta o ΔH da reação" },
+                    { letter: "B", text: "Diminui a energia de ativação" },
+                    { letter: "C", text: "É consumido durante o processo" },
+                    { letter: "D", text: "Torna a reação endotérmica" }
+                ],
+                correct: 1,
+                explanation: "Os catalisadores oferecem um caminho alternativo com menor barreira de energia, sem serem consumidos."
+            },
+            {
+                text: "Como o aumento da temperatura afeta a velocidade da maioria das reações?",
+                options: [
+                    { letter: "A", text: "Diminui a velocidade" },
+                    { letter: "B", text: "Aumenta a velocidade" },
+                    { letter: "C", text: "Não afeta" },
+                    { letter: "D", text: "Cessa a reação" }
+                ],
+                correct: 1,
+                explanation: "Temperaturas maiores resultam em moléculas mais rápidas, aumentando a frequência e a força das colisões."
+            },
+            {
+                text: "Para que uma colisão seja efetiva, é necessário:",
+                options: [
+                    { letter: "A", text: "Apenas contato físico" },
+                    { letter: "B", text: "Orientação favorável e energia mínima" },
+                    { letter: "C", text: "Luz solar constante" },
+                    { letter: "D", text: "Um meio líquido" }
+                ],
+                correct: 1,
+                explanation: "A teoria das colisões exige geometria espacial correta e energia superior à energia de ativação."
+            },
+            {
+                text: "Aumentar a concentração dos reagentes geralmente:",
+                options: [
+                    { letter: "A", text: "Diminui a velocidade da reação" },
+                    { letter: "B", text: "Não altera a velocidade" },
+                    { letter: "C", text: "Aumenta a velocidade da reação" },
+                    { letter: "D", text: "Inverte a reação" }
+                ],
+                correct: 2,
+                explanation: "Mais moléculas de reagente no mesmo volume significa mais colisões por segundo, aumentando a velocidade da reação."
+            },
+            {
+                text: "Por que um comprimido efervescente triturado dissolve mais rápido?",
+                options: [
+                    { letter: "A", text: "Porque muda a composição química" },
+                    { letter: "B", text: "Porque aumenta a superfície de contato" },
+                    { letter: "C", text: "Porque a temperatura muda" },
+                    { letter: "D", text: "Porque adiciona um catalisador" }
+                ],
+                correct: 1,
+                explanation: "Ao triturar, a área de superfície de contato aumenta, permitindo mais colisões simultâneas entre reagentes, acelerando a reação."
+            },
+            {
+                text: "O que é inibidor em uma reação química?",
+                options: [
+                    { letter: "A", text: "Uma substância que acelera a reação" },
+                    { letter: "B", text: "Uma substância que retarda ou impede a reação" },
+                    { letter: "C", text: "Um tipo de catalisador" },
+                    { letter: "D", text: "Um reagente consumido" }
+                ],
+                correct: 1,
+                explanation: "Inibidores são substâncias que diminuem a velocidade da reação ou a impedem. São o oposto dos catalisadores."
+            },
+            {
+                text: "As enzimas são catalisadores biológicos. Elas são feitas de:",
+                options: [
+                    { letter: "A", text: "Metais pesados" },
+                    { letter: "B", text: "Proteínas" },
+                    { letter: "C", text: "Carboidratos" },
+                    { letter: "D", text: "Lipídios" }
+                ],
+                correct: 1,
+                explanation: "As enzimas são proteínas especializadas que atuam como catalisadores biológicos, acelerando reações no organismo."
+            },
+            {
+                text: "A velocidade de uma reação é medida pela variação de:",
+                options: [
+                    { letter: "A", text: "Temperatura ao longo do tempo" },
+                    { letter: "B", text: "Concentração de reagentes ou produtos ao longo do tempo" },
+                    { letter: "C", text: "Pressão do ambiente" },
+                    { letter: "D", text: "Volume do recipiente" }
+                ],
+                correct: 1,
+                explanation: "A velocidade de reação é a variação da concentração de reagentes (que diminui) ou produtos (que aumenta) por unidade de tempo."
+            },
+            {
+                text: "A Regra de Van't Hoff diz que, ao aumentar 10°C na temperatura:",
+                options: [
+                    { letter: "A", text: "A velocidade diminui pela metade" },
+                    { letter: "B", text: "A velocidade duplica ou triplica" },
+                    { letter: "C", text: "Nada acontece" },
+                    { letter: "D", text: "A reação para" }
+                ],
+                correct: 1,
+                explanation: "Segundo Van't Hoff, para cada aumento de 10°C, a velocidade da reação aproximadamente dobra ou triplica."
+            },
+            {
+                text: "Em uma reação de 1ª ordem, se a concentração do reagente dobra, a velocidade:",
+                options: [
+                    { letter: "A", text: "Permanece igual" },
+                    { letter: "B", text: "Dobra" },
+                    { letter: "C", text: "Quadruplica" },
+                    { letter: "D", text: "Triplica" }
+                ],
+                correct: 1,
+                explanation: "Em reações de 1ª ordem, a velocidade é diretamente proporcional à concentração. Se a concentração dobra, a velocidade também dobra."
+            }
+        ];
+    </script>
+
+    <!-- / Carregamento dos scripts base -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+</html>
+
+
+
+

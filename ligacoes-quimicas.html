@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- / Cabeçalho com metadados -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ligações Químicas — Mollab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <!-- / Topo com navegação padrão -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="home.html" class="logo">
+                <span class="logo-text">Mollab</span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="home.html">Início</a>
+                <a href="disciplinas.html" class="active">Disciplinas</a>
+                <a href="experimentos.html">Experimentos</a>
+                <a href="sobre.html">Sobre</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon" id="theme-toggle" aria-label="Alternar Tema">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    
+
+    <!-- / Hero: Título da disciplina -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Ligações <span class="text-purple">Químicas</span></h1>
+            <p>Entenda como os átomos se unem para formar moléculas e compostos estáveis.</p>
+        </div>
+    </section>
+
+    <!-- / Explicação sobre estabilidade e tipos de ligações -->
+    <section class="container">
+        <div class="demo-block">
+            <div class="demo-header">
+                <h2>A Estabilidade Atômica</h2>
+                <p>Os átomos buscam a estabilidade eletrônica, geralmente seguindo a Regra do Octeto, ao compartilhar ou
+                    transferir elétrons.</p>
+            </div>
+
+            <div class="demo-body">
+                <div class="demo-content">
+                    <div class="concept-section">
+                        <h3>Tipos de Ligações</h3>
+                        <p>Existem três tipos principais: <strong>Iônica</strong> (transferência de elétrons),
+                            <strong>Covalente</strong> (compartilhamento de elétrons) e <strong>Metálica</strong> (mar
+                            de elétrons). Cada uma resulta em substâncias com propriedades físicas e químicas únicas.
+                        </p>
+                    </div>
+
+                    <!-- / Quiz renderizado pelo script.js -->
+                    <div class="quiz-box" id="quiz"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- / Rodapé padrão -->
+    <footer class="footer footer-centered">
+        <div class="container footer-bottom">
+            © 2026 Mollab. Conhecimento que transforma.
+        </div>
+    </footer>
+
+    <script>
+        /* / Banco de perguntas específico para Ligações Químicas */
+        window.quizQuestions = [
+            {
+                text: "O que diz a Regra do Octeto?",
+                options: [
+                    { letter: "A", text: "Átomos são estáveis com 2 elétrons" },
+                    { letter: "B", text: "Átomos buscam ter 8 elétrons na camada de valência" },
+                    { letter: "C", text: "Átomos devem ter 8 prótons no núcleo" },
+                    { letter: "D", text: "Ligações ocorrem apenas entre 8 átomos" }
+                ],
+                correct: 1,
+                explanation: "A Regra do Octeto estabelece que os átomos tendem a se ligar para atingir 8 elétrons na camada externa, assemelhando-se aos gases nobres."
+            },
+            {
+                text: "Qual ligação ocorre pela transferência definitiva de elétrons?",
+                options: [
+                    { letter: "A", text: "Ligação Covalente" },
+                    { letter: "B", text: "Ligação Metálica" },
+                    { letter: "C", text: "Ligação Iônica" },
+                    { letter: "D", text: "Ponte de Hidrogênio" }
+                ],
+                correct: 2,
+                explanation: "Na ligação iônica, um átomo (metal) doa elétrons para outro (ametal), resultando na atração entre íons opostos."
+            },
+            {
+                text: "A água (H₂O) possui qual tipo de ligação entre seus átomos?",
+                options: [
+                    { letter: "A", text: "Iônica" },
+                    { letter: "B", text: "Covalente" },
+                    { letter: "C", text: "Metálica" },
+                    { letter: "D", text: "Não há ligação" }
+                ],
+                correct: 1,
+                explanation: "Na molécula de água, os átomos de hidrogênio e oxigênio compartilham elétrons, caracterizando uma ligação covalente."
+            },
+            {
+                text: "A ligação metálica é caracterizada por:",
+                options: [
+                    { letter: "A", text: "Compartilhamento de pares de elétrons" },
+                    { letter: "B", text: "Transferência total de elétrons" },
+                    { letter: "C", text: "Um 'mar' de elétrons livres entre cátions metálicos" },
+                    { letter: "D", text: "Atrações entre moléculas polares" }
+                ],
+                correct: 2,
+                explanation: "Na ligação metálica, os elétrons da camada de valência se desprendem e circulam livremente entre os cátions, formando um 'mar de elétrons'."
+            },
+            {
+                text: "Compostos iônicos como o NaCl geralmente possuem:",
+                options: [
+                    { letter: "A", text: "Baixo ponto de fusão e são isolantes" },
+                    { letter: "B", text: "Alto ponto de fusão e conduzem eletricidade quando dissolvidos" },
+                    { letter: "C", text: "São gases em temperatura ambiente" },
+                    { letter: "D", text: "São maleáveis e dúcteis" }
+                ],
+                correct: 1,
+                explanation: "Compostos iônicos têm alto ponto de fusão devido à forte atração eletrostática. Quando dissolvidos em água, os íons livres conduzem eletricidade."
+            },
+            {
+                text: "Qual a diferença entre ligação covalente polar e apolar?",
+                options: [
+                    { letter: "A", text: "Polar ocorre entre átomos iguais" },
+                    { letter: "B", text: "Apolar ocorre entre átomos diferentes" },
+                    { letter: "C", text: "Polar ocorre entre átomos com eletronegatividades diferentes" },
+                    { letter: "D", text: "Não existe diferença" }
+                ],
+                correct: 2,
+                explanation: "Na ligação covalente polar, os elétrons são compartilhados de forma desigual devido à diferença de eletronegatividade. Na apolar, são iguais (ex: H₂, O₂)."
+            },
+            {
+                text: "As pontes de hidrogênio são exemplos de:",
+                options: [
+                    { letter: "A", text: "Ligações intramoleculares fortes" },
+                    { letter: "B", text: "Interações intermoleculares" },
+                    { letter: "C", text: "Ligações iônicas fracas" },
+                    { letter: "D", text: "Ligações metálicas" }
+                ],
+                correct: 1,
+                explanation: "As pontes de hidrogênio são forças intermoleculares (entre moléculas) que ocorrem quando o H está ligado a F, O ou N. São responsáveis pelo alto ponto de ebulição da água."
+            },
+            {
+                text: "Na ligação covalente dativa (coordenada), o que ocorre?",
+                options: [
+                    { letter: "A", text: "Dois átomos doam elétrons igualmente" },
+                    { letter: "B", text: "Um átomo fornece os dois elétrons do par compartilhado" },
+                    { letter: "C", text: "Os elétrons são transferidos permanentemente" },
+                    { letter: "D", text: "Não há compartilhamento de elétrons" }
+                ],
+                correct: 1,
+                explanation: "Na ligação dativa, apenas um dos átomos fornece o par de elétrons compartilhado. É comum em compostos como o SO₃ e o HNO₃."
+            },
+            {
+                text: "A eletronegatividade está relacionada com qual tipo de ligação?",
+                options: [
+                    { letter: "A", text: "Quanto maior a diferença de eletronegatividade, mais iônica" },
+                    { letter: "B", text: "Quanto maior a diferença, mais covalente" },
+                    { letter: "C", text: "A eletronegatividade não influencia o tipo de ligação" },
+                    { letter: "D", text: "Quanto menor a diferença, mais iônica" }
+                ],
+                correct: 0,
+                explanation: "Grandes diferenças de eletronegatividade (> 1,7) resultam em ligações iônicas. Diferenças menores resultam em ligações covalentes."
+            },
+            {
+                text: "O diamante é formado por átomos de carbono unidos por ligações:",
+                options: [
+                    { letter: "A", text: "Iônicas" },
+                    { letter: "B", text: "Metálicas" },
+                    { letter: "C", text: "Covalentes" },
+                    { letter: "D", text: "Van der Waals" }
+                ],
+                correct: 2,
+                explanation: "No diamante, cada carbono faz 4 ligações covalentes com outros carbonos, formando uma estrutura tridimensional extremamente dura."
+            }
+        ];
+    </script>
+
+    <!-- / Carregamento dos scripts base -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
+
+

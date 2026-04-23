@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- / Cabeçalho da página "Sobre" -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sobre — Mollab</title>
+    <meta name="description"
+        content="Conheça o Mollab, uma plataforma educacional voltada ao ensino interativo de química." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <!-- Biblioteca de Gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- / Cabeçalho padrão do site -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="home.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="3" fill="currentColor" />
+                        <ellipse cx="12" cy="12" rx="10" ry="4" stroke="currentColor" stroke-width="2"
+                            transform="rotate(45 12 12)" />
+                        <ellipse cx="12" cy="12" rx="10" ry="4" stroke="currentColor" stroke-width="2"
+                            transform="rotate(-45 12 12)" />
+                    </svg>
+                </div>
+                <span class="logo-text">Mollab</span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="home.html">Início</a>
+                <a href="disciplinas.html">Disciplinas</a>
+                <a href="experimentos.html">Experimentos</a>
+                <a href="sobre.html" class="active">Sobre</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon" id="theme-toggle" aria-label="Alternar Tema">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+                <a href="index.html" class="btn-login">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <span>Entrar</span>
+                </a>
+                <button class="btn-icon menu-toggle" aria-label="Menu"
+                    onclick="document.getElementById('mobile-nav').classList.toggle('open')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" x2="20" y1="12" y2="12" />
+                        <line x1="4" x2="20" y1="6" y2="6" />
+                        <line x1="4" x2="20" y1="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <nav class="nav-mobile" id="mobile-nav">
+            <a href="home.html">Início</a>
+            <a href="disciplinas.html">Disciplinas</a>
+            <a href="experimentos.html">Experimentos</a>
+            <a href="sobre.html">Sobre</a>
+        </nav>
+    </header>
+
+
+
+    <!-- / Hero da página explicando o Mollab -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="page-hero-tag">A Plataforma</span>
+            <h1>Inovação no Ensino de <span class="text-purple">Química</span></h1>
+        </div>
+    </section>
+
+    <section class="container about-container">
+
+        <!-- Bloco Principal: Conceito -->
+        <article class="about-card">
+            <h2>O que é o Mollab?</h2>
+            <p>O Mollab nasceu da necessidade de <strong>descomplicar a química</strong> e torná-la acessível.
+                Acreditamos que a melhor forma de aprender é através da interação, transformando conceitos abstratos em
+                experiências visuais e práticas.</p>
+
+            <div class="concept-grid">
+                <div class="concept-item">
+                    <h3>Abordagem Visual</h3>
+                    <p>Simuladores e gráficos dinâmicos que trazem o laboratório para a palma da sua mão.</p>
+                </div>
+                <div class="concept-item">
+                    <h3>Para Alunos</h3>
+                    <p>Uma ferramenta para revisar matérias de forma fluida, com foco em retenção e engajamento.</p>
+                </div>
+                <div class="concept-item">
+                    <h3>Para Professores</h3>
+                    <p>Um suporte didático interativo para tornar as aulas mais ricas e tecnológicas.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Bloco: Impacto Educacional -->
+        <article class="about-card">
+            <h2>Impacto Educacional</h2>
+            <p>Gamificação e aprendizado interativo são fundamentais para a educação moderna. O Mollab utiliza essas
+                técnicas para maximizar o desempenho acadêmico.</p>
+
+            <div class="chart-hud">
+                <canvas id="impactChart"></canvas>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <h3>Referências e Fontes</h3>
+                <ul class="ref-list">
+                    <li>ACS (American Chemical Society) - Estudos sobre Gamificação.</li>
+                    <li>UNESCO - Relatórios sobre Tecnologias Digitais na Educação.</li>
+                    <li>University of Liverpool - Pesquisa de Engajamento via Kahoot!.</li>
+                    <li>Elsevier (ScienceDirect) - Impacto do Quizizz na motivação.</li>
+                    <li>World Economic Forum - O futuro do aprendizado interativo.</li>
+                </ul>
+            </div>
+        </article>
+
+        <!-- Bloco: Equipe -->
+        <article class="about-card">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2>Desenvolvedores</h2>
+                <p>O time por trás de cada linha de código e design do Mollab.</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="player-card">
+                    <h4>Adrian Alves 👑</h4>
+                    <span class="player-role">Programador</span>
+                    <p class="player-desc">Desenvolvedor de sistemas e lógica de jogos interativos.</p>
+                </div>
+                <div class="player-card">
+                    <h4>Anna Clara</h4>
+                    <span class="player-role">Documentação</span>
+                    <p class="player-desc">Pesquisa técnica e estruturação de dados teóricos.</p>
+                </div>
+                <div class="player-card">
+                    <h4>Eduarda Nicolly</h4>
+                    <span class="player-role">Prog & Design</span>
+                    <p class="player-desc">Líder de desenvolvimento e identidade visual da plataforma.</p>
+                </div>
+                <div class="player-card">
+                    <h4>Guilherme</h4>
+                    <span class="player-role">Designer</span>
+                    <p class="player-desc">Criação de artes, UX/UI e experiência visual do usuário.</p>
+                </div>
+                <div class="player-card">
+                    <h4>Júlia da Silva</h4>
+                    <span class="player-role">Documentação</span>
+                    <p class="player-desc">Catalogação de conteúdos e revisão teórica das disciplinas.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Bloco: Orientação -->
+        <article class="about-card" style="text-align: center;">
+            <h2>Orientação Acadêmica</h2>
+            <div style="display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                <div>
+                    <h4 style="color: var(--text-primary); font-size: 1.3rem; margin-bottom: 4px;">Heberton Corrêa</h4>
+                    <p class="player-role">Professor de Química • Orientador</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--text-primary); font-size: 1.3rem; margin-bottom: 4px;">Laerte Rodrigues</h4>
+                    <p class="player-role">Professor de PI • Co-Orientador</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Aviso Final -->
+        <div style="opacity: 0.6; text-align: center; max-width: 700px; margin: 0 auto; font-size: 0.9rem;">
+            <p><strong>Aviso:</strong> O Mollab é uma ferramenta complementar de ensino. Ele não substitui aulas
+                presenciais nem a orientação de um professor qualificado.</p>
+        </div>
+
+    </section>
+
+    <!-- / Rodapé -->
+    <footer class="footer footer-centered">
+        <div class="container footer-grid">
+            <div>
+                <h3 class="footer-brand">Mollab</h3>
+
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            © 2026 Mollab. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- / Carregamento dos scripts base -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        // Lógica do Gráfico de Impacto Educacional
+        document.addEventListener('DOMContentLoaded', function () {
+            const ctx = document.getElementById('impactChart');
+            if (!ctx) return;
+
+            // Cores baseadas no design da Mollab
+            const purple = '#9d4edd';
+            const magenta = '#c229b6';
+            const textPrimary = getComputedStyle(document.body).getPropertyValue('--text-primary').trim();
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Engajamento', 'Desempenho', 'Retenção'],
+                    datasets: [{
+                        label: 'Ensino Tradicional (%)',
+                        data: [42, 51, 38],
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        borderColor: 'rgba(255, 255, 255, 0.2)',
+                        borderWidth: 1,
+                        borderRadius: 8
+                    }, {
+                        label: 'Ensino com Ferramentas Digitais (%)',
+                        data: [94, 82, 79],
+                        backgroundColor: magenta,
+                        borderColor: magenta,
+                        borderWidth: 1,
+                        borderRadius: 8,
+                        boxShadow: '0 0 20px rgba(194, 41, 182, 0.4)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: window.innerWidth <= 768 ? 'bottom' : 'top',
+                            labels: {
+                                color: textPrimary,
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: window.innerWidth <= 768 ? 10 : 12,
+                                    weight: '600'
+                                },
+                                boxWidth: window.innerWidth <= 768 ? 12 : 40
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#240046',
+                            titleFont: { size: 14 },
+                            bodyFont: { size: 14 },
+                            padding: 15,
+                            displayColors: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: textPrimary,
+                                callback: function (value) { return value + '%'; }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: textPrimary,
+                                font: { weight: '600' }
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

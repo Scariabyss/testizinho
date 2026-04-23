@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Funções Orgânicas — Mollab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <!-- / Topo com navegação padrão -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="home.html" class="logo">
+                <span class="logo-text">Mollab</span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="home.html">Início</a>
+                <a href="disciplinas.html" class="active">Disciplinas</a>
+                <a href="experimentos.html">Experimentos</a>
+                <a href="sobre.html">Sobre</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon" id="theme-toggle" aria-label="Alternar Tema">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    
+
+    <!-- / Hero: Título da disciplina -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Funções Orgânicas</h1>
+            <p>Álcoois, cetonas, ésteres e muito mais. Entenda os grupos funcionais que dão vida à química.</p>
+        </div>
+    </section>
+
+    <!-- / Conteúdo teórico sobre grupos funcionais -->
+    <section class="container">
+        <div class="demo-block">
+            <div class="demo-header">
+                <h2>Grupos Funcionais</h2>
+                <p>Identifique os heteroátomos e as estruturas que determinam o comportamento das moléculas orgânicas.
+                </p>
+            </div>
+
+            <div class="demo-body">
+                <div class="demo-content">
+                    <div class="concept-section">
+                        <h3>Diversidade de Funções</h3>
+                        <p>O <strong>Grupo Hidroxila (-OH)</strong> define os álcoois, enquanto a <strong>Carbonila
+                                (C=O)</strong> está presente em aldeídos e cetonas. Essas pequenas variações mudam
+                            drasticamente o cheiro, sabor e reatividade dos compostos.</p>
+                    </div>
+
+                    <!-- / Quiz renderizado pelo script.js -->
+                    <div class="quiz-box" id="quiz"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- / Rodapé padrão -->
+    <footer class="footer footer-centered">
+        <div class="container footer-bottom">
+            © 2026 Mollab.
+        </div>
+    </footer>
+
+    <script>
+        /* / Banco de perguntas específico para Funções Orgânicas */
+        window.quizQuestions = [
+            {
+                text: "O prefixo -ol indica qual função orgânica?",
+                options: [
+                    { letter: "A", text: "Ácidos" },
+                    { letter: "B", text: "Éteres" },
+                    { letter: "C", text: "Álcoois" },
+                    { letter: "D", text: "Hidrocarbonetos" }
+                ],
+                correct: 2,
+                explanation: "O sufixo -ol é a marca registrada dos álcoois, como o Etanol (álcool comum)."
+            },
+            {
+                text: "Qual grupo funcional caracteriza os Ácidos Carboxílicos?",
+                options: [
+                    { letter: "A", text: "-OH" },
+                    { letter: "B", text: "-CHO" },
+                    { letter: "C", text: "-COOH" },
+                    { letter: "D", text: "-O-" }
+                ],
+                correct: 2,
+                explanation: "O grupo Carboxila (-COOH) é a união da carbonila com a hidroxila num mesmo carbono."
+            },
+            {
+                text: "A acetona (propanona) pertence a qual grupo?",
+                options: [
+                    { letter: "A", text: "Aldeído" },
+                    { letter: "B", text: "Cetona" },
+                    { letter: "C", text: "Éster" },
+                    { letter: "D", text: "Fenol" }
+                ],
+                correct: 1,
+                explanation: "A Propanona possui uma carbonila entre dois carbonos, o que a classifica como uma cetona."
+            },
+            {
+                text: "O que diferencia um aldeído de uma cetona?",
+                options: [
+                    { letter: "A", text: "Aldeídos não possuem oxigênio" },
+                    { letter: "B", text: "No aldeído a carbonila está na extremidade da cadeia" },
+                    { letter: "C", text: "Na cetona a carbonila está na extremidade" },
+                    { letter: "D", text: "Não há diferença entre eles" }
+                ],
+                correct: 1,
+                explanation: "No aldeído, o grupo C=O está no carbono terminal (extremidade). Na cetona, o C=O está entre dois carbonos da cadeia."
+            },
+            {
+                text: "A função éter é caracterizada por qual estrutura?",
+                options: [
+                    { letter: "A", text: "R-OH (hidroxila)" },
+                    { letter: "B", text: "R-O-R' (oxigênio entre dois carbonos)" },
+                    { letter: "C", text: "R-COOH (carboxila)" },
+                    { letter: "D", text: "R-NH₂ (amina)" }
+                ],
+                correct: 1,
+                explanation: "Nos éteres, um átomo de oxigênio está ligado a dois radicais orgânicos (R-O-R'). O éter dietílico é um exemplo famoso."
+            },
+            {
+                text: "As aminas são compostos orgânicos que possuem qual elemento além de C e H?",
+                options: [
+                    { letter: "A", text: "Enxofre (S)" },
+                    { letter: "B", text: "Nitrogênio (N)" },
+                    { letter: "C", text: "Fósforo (P)" },
+                    { letter: "D", text: "Cloro (Cl)" }
+                ],
+                correct: 1,
+                explanation: "As aminas são derivadas da amônia (NH₃) onde um ou mais hidrogênios são substituídos por grupos orgânicos. Contêm nitrogênio."
+            },
+            {
+                text: "O fenol se diferencia do álcool porque o grupo -OH está ligado a:",
+                options: [
+                    { letter: "A", text: "Um carbono alifático" },
+                    { letter: "B", text: "Um anel aromático (benzeno)" },
+                    { letter: "C", text: "Um nitrogênio" },
+                    { letter: "D", text: "Dois carbonos simultaneamente" }
+                ],
+                correct: 1,
+                explanation: "No fenol, a hidroxila (-OH) está ligada diretamente a um carbono do anel aromático. Nos álcoois, está em carbono alifático (fora do anel)."
+            },
+            {
+                text: "Ésteres são produzidos pela reação entre:",
+                options: [
+                    { letter: "A", text: "Dois álcoois" },
+                    { letter: "B", text: "Um ácido carboxílico e um álcool" },
+                    { letter: "C", text: "Uma amina e um ácido" },
+                    { letter: "D", text: "Dois aldeídos" }
+                ],
+                correct: 1,
+                explanation: "Ésteres são formados pela reação de esterificação: ácido carboxílico + álcool → éster + água. São responsáveis pelo aroma de frutas."
+            },
+            {
+                text: "Qual função orgânica está presente no vinagre (ácido acético)?",
+                options: [
+                    { letter: "A", text: "Álcool" },
+                    { letter: "B", text: "Cetona" },
+                    { letter: "C", text: "Ácido carboxílico" },
+                    { letter: "D", text: "Éster" }
+                ],
+                correct: 2,
+                explanation: "O vinagre contém ácido acético (CH₃COOH), que possui o grupo funcional carboxila (-COOH), sendo um ácido carboxílico."
+            },
+            {
+                text: "O formaldeído (metanal), usado em conservação, pertence a qual função?",
+                options: [
+                    { letter: "A", text: "Cetona" },
+                    { letter: "B", text: "Éster" },
+                    { letter: "C", text: "Aldeído" },
+                    { letter: "D", text: "Álcool" }
+                ],
+                correct: 2,
+                explanation: "O formaldeído (HCHO) é o aldeído mais simples, com o grupo -CHO no carbono terminal. É utilizado como conservante e desinfetante."
+            }
+        ];
+    </script>
+
+    <!-- / Carregamento dos scripts base -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
+
+

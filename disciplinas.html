@@ -1,0 +1,195 @@
+<html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disciplinas — Mollab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <!-- / Topo do site: Logo, Navegação e Ações (Tema/Login) -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="home.html" class="logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="3" fill="currentColor" />
+                        <ellipse cx="12" cy="12" rx="10" ry="4" stroke="currentColor" stroke-width="2" transform="rotate(45 12 12)" />
+                        <ellipse cx="12" cy="12" rx="10" ry="4" stroke="currentColor" stroke-width="2" transform="rotate(-45 12 12)" />
+                    </svg>
+                </div>
+                <span class="logo-text">Mollab</span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="home.html">Início</a>
+                <a href="disciplinas.html" class="active">Disciplinas</a>
+                <a href="experimentos.html">Experimentos</a>
+                <a href="novidades.html">Novidades</a>
+                <a href="sobre.html">Sobre</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon" id="theme-toggle" aria-label="Alternar Tema">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+                <a href="index.html" class="btn-login">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <span>Entrar</span>
+                </a>
+                <button class="btn-icon menu-toggle" aria-label="Menu"
+                    onclick="document.getElementById('mobile-nav').classList.toggle('open')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" x2="20" y1="12" y2="12" />
+                        <line x1="4" x2="20" y1="6" y2="6" />
+                        <line x1="4" x2="20" y1="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- / Menu para dispositivos móveis -->
+        <nav class="nav-mobile" id="mobile-nav">
+            <a href="home.html">Início</a>
+            <a href="disciplinas.html">Disciplinas</a>
+            <a href="experimentos.html">Experimentos</a>
+            <a href="novidades.html">Novidades</a>
+            <a href="sobre.html">Sobre</a>
+        </nav>
+    </header>
+
+    
+
+    <!-- / Banner de destaque da página -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Disciplinas de <span class="text-purple">Química</span></h1>
+        </div>
+    </section>
+
+    <!-- / Seção: Química Geral -->
+    <section class="container discipline-section">
+        <div class="section-header">
+            <h2>Química Geral</h2>
+        </div>
+        <div class="discipline-grid">
+            <a href="estrutura-atomica.html" class="discipline-card" data-quiz-id="estrutura-atomica">
+                <div class="discipline-info">
+                    <h3>Estrutura Atômica</h3>
+                </div>
+                <div class="discipline-progress" data-quiz-progress="estrutura-atomica">0%</div>
+            </a>
+            <a href="tabela-periodica.html" class="discipline-card" data-quiz-id="tabela-periodica">
+                <div class="discipline-info">
+                    <h3>Tabela Periódica</h3>
+                </div>
+                <div class="discipline-progress" data-quiz-progress="tabela-periodica">0%</div>
+            </a>
+            <a href="ligacoes-quimicas.html" class="discipline-card" data-quiz-id="ligacoes-quimicas">
+                <div class="discipline-info">
+                    <h3>Ligações Químicas</h3>
+                </div>
+                <div class="discipline-progress" data-quiz-progress="ligacoes-quimicas">0%</div>
+            </a>
+            <a href="balancamento.html" class="discipline-card" data-quiz-id="balancamento">
+                <div class="discipline-info">
+                    <h3>Reações Químicas</h3>
+                </div>
+                <div class="discipline-progress" data-quiz-progress="balancamento">0%</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- / Seção: Química Orgânica -->
+    <section class="container discipline-section">
+        <div class="section-header">
+            <h2>Química Orgânica</h2>
+        </div>
+        <div class="discipline-grid">
+            <a href="hidrocarbonetos.html" class="discipline-card" data-quiz-id="hidrocarbonetos">
+                <div class="discipline-info">
+                    <h3>Hidrocarbonetos</h3>
+                </div>
+                <div class="discipline-progress" data-quiz-progress="hidrocarbonetos">0%</div>
+            </a>
+            <a href="funcoes-organicas.html" class="discipline-card" data-quiz-id="funcoes-organicas">
+                <div class="discipline-info">
+                    <h3>Funções Orgânicas</h3>
+                </div>
+                <div class="discipline-progress" data-quiz-progress="funcoes-organicas">0%</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- / Seção: Físico-Química -->
+    <section class="container discipline-section">
+        <div class="section-header">
+            <h2>Físico-Química</h2>
+        </div>
+        <div class="discipline-grid">
+            <a href="termoquimica.html" class="discipline-card" data-quiz-id="termoquimica">
+                <div class="discipline-info">
+                    <h3>Termoquímica</h3>
+                </div>
+                <div class="discipline-progress" data-quiz-progress="termoquimica">0%</div>
+            </a>
+            <a href="cinetica-quimica.html" class="discipline-card" data-quiz-id="cinetica-quimica">
+                <div class="discipline-info">
+                    <h3>Cinética Química</h3>
+                </div>
+                <div class="discipline-progress" data-quiz-progress="cinetica-quimica">0%</div>
+            </a>
+        </div>
+    </section>
+
+    <!-- / Rodapé simples -->
+    <footer class="footer footer-centered">
+        <div class="container footer-grid">
+            <div>
+                <h3 class="footer-brand">Mollab</h3>
+                
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            © 2026 Mollab. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- / Scripts de integração com Firebase e Lógica do Site -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        /* / Tenta carregar o progresso do usuário assim que a página é montada */
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof loadSavedProgress === 'function') {
+                loadSavedProgress();
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+

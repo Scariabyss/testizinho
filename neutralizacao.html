@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- / Cabeçalho com definições de metadados e links de estilo -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neutralização — Mollab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <!-- / Topo da página com link de retorno -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="home.html" class="logo">
+                <span class="logo-text">Mollab</span>
+            </a>
+        </div>
+    </header>
+    
+    
+
+    <!-- / Hero: Título da experiência -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Neutralização <span class="text-purple">Química</span></h1>
+            <p>Explore as reações de neutralização e o equilíbrio ácido-base com este simulador interativo.</p>
+        </div>
+    </section>
+
+    <!-- / Área do simulador Godot e controles -->
+    <section class="container">
+        <div class="game-container">
+            <!-- / Iframe que carrega o simulador exportado em HTML5 -->
+            <iframe src="expotado/melhorVersao/index.html" allowfullscreen></iframe>
+        </div>
+
+        <div class="game-controls">
+            <button class="btn-fullscreen" onclick="toggleFullScreen()">Tela Cheia</button>
+        </div>
+
+        <!-- / Explicação teórica sobre o experimento -->
+        <div class="game-info-block">
+            <h2>Sobre este experimento</h2>
+            <p>A neutralização é uma reação química que ocorre entre um ácido e uma base, produzindo sal e água. Este
+                simulador permite visualizar o processo em nível molecular e observar as mudanças de pH conforme os
+                reagentes são adicionados.</p>
+
+            <h2>Como jogar</h2>
+            <p>Utilize os controles integrados no simulador para misturar diferentes quantidades de ácidos e bases.
+                Observe o indicador de pH e tente alcançar o ponto de neutralização exato.</p>
+        </div>
+
+        <!-- / Seção de Desafio: Quiz relacionado ao tema -->
+        <div class="demo-block">
+            <div class="demo-header">
+                <h2>Teste seu Conhecimento</h2>
+                <p>Responda às perguntas sobre Reações de Neutralização e pH.</p>
+            </div>
+            <div class="demo-content">
+                <div class="quiz-box" id="quiz"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- / Rodapé padrão do experimento -->
+    <footer class="footer footer-centered">
+        <div class="container footer-bottom">
+            © 2026 Mollab. Desenvolvido com Godot Engine.
+        </div>
+    </footer>
+
+    <script>
+        /* / Função para colocar o simulador em tela cheia (se houver iframe) */
+        function toggleFullScreen() {
+            let iframe = document.querySelector('iframe');
+            if (iframe && iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe && iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe && iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+        }
+
+        /* / Definição das perguntas do quiz sobre neutralização */
+        window.quizQuestions = [
+            {
+                text: "Quais são os produtos de uma reação de neutralização total?",
+                options: [
+                    { letter: "A", text: "Sal e Água" },
+                    { letter: "B", text: "Gás e Sólido" },
+                    { letter: "C", text: "Apenas Ácido" },
+                    { letter: "D", text: "Apenas Base" }
+                ],
+                correct: 0,
+                explanation: "Na neutralização, o H+ do ácido e o OH- da base formam água, e os íons restantes formam o sal."
+            },
+            {
+                text: "Qual é o valor do pH de uma solução perfeitamente neutra a 25°C?",
+                options: [
+                    { letter: "A", text: "0" },
+                    { letter: "B", text: "7" },
+                    { letter: "C", text: "14" },
+                    { letter: "D", text: "1" }
+                ],
+                correct: 1,
+                explanation: "O pH 7 é considerado neutro. Valores abaixo de 7 são ácidos e acima de 7 são básicos."
+            },
+            {
+                text: "A Fenolftaleína fica rosa em qual meio?",
+                options: [
+                    { letter: "A", text: "Ácido" },
+                    { letter: "B", text: "Básico (Alcalino)" },
+                    { letter: "C", text: "Neutro" },
+                    { letter: "D", text: "No vácuo" }
+                ],
+                correct: 1,
+                explanation: "A fenolftaleína é um indicador que muda de incolor para rosa intenso em presença de bases."
+            },
+            {
+                text: "A reação HCl + NaOH → NaCl + H₂O é um exemplo de:",
+                options: [
+                    { letter: "A", text: "Combustão" },
+                    { letter: "B", text: "Neutralização" },
+                    { letter: "C", text: "Oxidação" },
+                    { letter: "D", text: "Decomposição" }
+                ],
+                correct: 1,
+                explanation: "Essa reação entre um ácido (HCl) e uma base (NaOH) produzindo sal (NaCl) e água é uma neutralização clássica."
+            },
+            {
+                text: "Segundo a teoria de Arrhenius, um ácido é uma substância que:",
+                options: [
+                    { letter: "A", text: "Libera OH⁻ em solução aquosa" },
+                    { letter: "B", text: "Libera H⁺ em solução aquosa" },
+                    { letter: "C", text: "Recebe elétrons" },
+                    { letter: "D", text: "É sempre sólido" }
+                ],
+                correct: 1,
+                explanation: "Para Arrhenius, ácidos são substâncias que, em solução aquosa, liberam íons H⁺ (ou H₃O⁺)."
+            },
+            {
+                text: "Uma solução com pH = 3 é classificada como:",
+                options: [
+                    { letter: "A", text: "Básica" },
+                    { letter: "B", text: "Neutra" },
+                    { letter: "C", text: "Ácida" },
+                    { letter: "D", text: "Impossível de determinar" }
+                ],
+                correct: 2,
+                explanation: "Soluções com pH menor que 7 são ácidas. Quanto menor o pH, mais ácida é a solução. pH = 3 é bastante ácido."
+            },
+            {
+                text: "O papel tornassol azul fica vermelho em contato com:",
+                options: [
+                    { letter: "A", text: "Soluções básicas" },
+                    { letter: "B", text: "Soluções ácidas" },
+                    { letter: "C", text: "Água pura" },
+                    { letter: "D", text: "Soluções neutras" }
+                ],
+                correct: 1,
+                explanation: "O papel tornassol azul muda para vermelho na presença de ácidos. O tornassol vermelho fica azul com bases."
+            },
+            {
+                text: "O que é uma neutralização parcial?",
+                options: [
+                    { letter: "A", text: "Quando o ácido e a base reagem completamente" },
+                    { letter: "B", text: "Quando sobra ácido ou base sem reagir" },
+                    { letter: "C", text: "Quando não se forma sal" },
+                    { letter: "D", text: "Quando a reação não ocorre" }
+                ],
+                correct: 1,
+                explanation: "Na neutralização parcial, há excesso de ácido ou de base após a reação, resultando na formação de um sal ácido ou sal básico."
+            },
+            {
+                text: "O leite de magnésia (Mg(OH)₂) é usado como antiácido porque:",
+                options: [
+                    { letter: "A", text: "É um ácido fraco" },
+                    { letter: "B", text: "Neutraliza o excesso de ácido no estômago" },
+                    { letter: "C", text: "Aumenta a acidez estomacal" },
+                    { letter: "D", text: "É um sal neutro" }
+                ],
+                correct: 1,
+                explanation: "O Mg(OH)₂ é uma base que neutraliza o HCl em excesso no estômago, aliviando a azia por meio de uma reação de neutralização."
+            },
+            {
+                text: "A escala de pH vai de:",
+                options: [
+                    { letter: "A", text: "0 a 7" },
+                    { letter: "B", text: "1 a 10" },
+                    { letter: "C", text: "0 a 14" },
+                    { letter: "D", text: "-7 a +7" }
+                ],
+                correct: 2,
+                explanation: "A escala de pH vai de 0 (extremamente ácido) a 14 (extremamente básico), com 7 sendo o ponto neutro."
+            }
+        ];
+    </script>
+
+    <!-- / Inclusão das bibliotecas do Firebase e scripts de lógica do Mollab -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
+
+

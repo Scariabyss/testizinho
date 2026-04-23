@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- / Cabeçalho com metadados e links para fontes e estilos -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabela Periódica — Mollab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <!-- / Topo da página com navegação -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="home.html" class="logo">
+                <span class="logo-text">Mollab</span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="home.html">Início</a>
+                <a href="disciplinas.html" class="active">Disciplinas</a>
+                <a href="experimentos.html">Experimentos</a>
+                <a href="sobre.html">Sobre</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon" id="theme-toggle" aria-label="Alternar Tema">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    
+
+    <!-- / Hero da página com título principal -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Tabela <span class="text-purple">Periódica</span></h1>
+            <p>Entenda como os elementos químicos estão organizados e suas principais propriedades periódicas.</p>
+        </div>
+    </section>
+
+    <!-- / Seção de conteúdo teórico sobre a tabela periódica -->
+    <section class="container">
+        <div class="demo-block">
+            <div class="demo-header">
+                <h2>Organização da Matéria</h2>
+                <p>A Tabela Periódica organiza os elementos em ordem crescente de número atômico, agrupando-os por
+                    propriedades semelhantes.</p>
+            </div>
+
+            <div class="demo-body">
+                <div class="demo-content">
+                    <div class="concept-section">
+                        <h3>Conceito</h3>
+                        <p>Os elementos são organizados em <strong>Períodos</strong> (linhas horizontais) e
+                            <strong>Grupos ou Famílias</strong> (colunas verticais). Elementos do mesmo grupo possuem o
+                            mesmo número de elétrons na camada de valência, o que lhes confere propriedades químicas
+                            similares.
+                        </p>
+                    </div>
+
+                    <!-- / Div onde o quiz será carregado dinamicamente -->
+                    <div class="quiz-box" id="quiz"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- / Rodapé padrão da página -->
+    <footer class="footer footer-centered">
+        <div class="container footer-bottom">
+            © 2026 Mollab. Conteúdo revisado.
+        </div>
+    </footer>
+
+    <script>
+        /* / Definição das perguntas do quiz específico sobre a Tabela Periódica */
+        window.quizQuestions = [
+            {
+                text: "Como os elementos são organizados na Tabela Periódica moderna?",
+                options: [
+                    { letter: "A", text: "Ordem decrescente de massa" },
+                    { letter: "B", text: "Ordem crescente de número atômico" },
+                    { letter: "C", text: "Ordem alfabética de nomes" },
+                    { letter: "D", text: "Pela cor de cada elemento" }
+                ],
+                correct: 1,
+                explanation: "Diferente de Mendeleev, a tabela atual segue a ordem crescente do número de prótons (número atômico)."
+            },
+            {
+                text: "O que as colunas verticais da tabela representam?",
+                options: [
+                    { letter: "A", text: "Períodos" },
+                    { letter: "B", text: "Famílias ou Grupos" },
+                    { letter: "C", text: "Isótopos" },
+                    { letter: "D", text: "Estados físicos" }
+                ],
+                correct: 1,
+                explanation: "As colunas verticais são chamadas de grupos ou famílias e reúnem elementos com propriedades químicas semelhantes."
+            },
+            {
+                text: "Qual destes elementos é um Gás Nobre?",
+                options: [
+                    { letter: "A", text: "Hidrogênio" },
+                    { letter: "B", text: "Oxigênio" },
+                    { letter: "C", text: "Hélio" },
+                    { letter: "D", text: "Ferro" }
+                ],
+                correct: 2,
+                explanation: "O Hélio pertence ao Grupo 18, a família dos Gases Nobres, conhecidos por sua baixa reatividade."
+            },
+            {
+                text: "A família dos Metais Alcalinos corresponde a qual grupo?",
+                options: [
+                    { letter: "A", text: "Grupo 1" },
+                    { letter: "B", text: "Grupo 2" },
+                    { letter: "C", text: "Grupo 17" },
+                    { letter: "D", text: "Grupo 18" }
+                ],
+                correct: 0,
+                explanation: "Os Metais Alcalinos (Li, Na, K, Rb, Cs, Fr) pertencem ao Grupo 1. São altamente reativos e possuem 1 elétron na camada de valência."
+            },
+            {
+                text: "Os Halogênios pertencem a qual grupo da tabela?",
+                options: [
+                    { letter: "A", text: "Grupo 1" },
+                    { letter: "B", text: "Grupo 14" },
+                    { letter: "C", text: "Grupo 17" },
+                    { letter: "D", text: "Grupo 18" }
+                ],
+                correct: 2,
+                explanation: "Os Halogênios (F, Cl, Br, I, At) estão no Grupo 17. Possuem 7 elétrons na camada de valência e são muito eletronegativos."
+            },
+            {
+                text: "O que as linhas horizontais (períodos) indicam na tabela periódica?",
+                options: [
+                    { letter: "A", text: "O número de camadas eletrônicas" },
+                    { letter: "B", text: "O número de prótons" },
+                    { letter: "C", text: "A massa atômica exata" },
+                    { letter: "D", text: "A reatividade do elemento" }
+                ],
+                correct: 0,
+                explanation: "Cada período indica o número de camadas (níveis de energia) que os átomos daquele período possuem."
+            },
+            {
+                text: "O que acontece com o raio atômico ao percorrer um período da esquerda para a direita?",
+                options: [
+                    { letter: "A", text: "Aumenta" },
+                    { letter: "B", text: "Permanece constante" },
+                    { letter: "C", text: "Diminui" },
+                    { letter: "D", text: "Dobra de tamanho" }
+                ],
+                correct: 2,
+                explanation: "Ao longo do período, o número de prótons aumenta, atraindo os elétrons com mais força e diminuindo o raio atômico."
+            },
+            {
+                text: "Qual propriedade periódica aumenta de baixo para cima e da esquerda para a direita?",
+                options: [
+                    { letter: "A", text: "Raio atômico" },
+                    { letter: "B", text: "Eletronegatividade" },
+                    { letter: "C", text: "Caráter metálico" },
+                    { letter: "D", text: "Reatividade dos metais" }
+                ],
+                correct: 1,
+                explanation: "A eletronegatividade cresce de baixo para cima e da esquerda para a direita. O Flúor é o elemento mais eletronegativo."
+            },
+            {
+                text: "Os elementos classificados como semimetais (metaloides) possuem quais características?",
+                options: [
+                    { letter: "A", text: "Só propriedades de metais" },
+                    { letter: "B", text: "Só propriedades de ametais" },
+                    { letter: "C", text: "Propriedades intermediárias entre metais e ametais" },
+                    { letter: "D", text: "Nenhuma propriedade química" }
+                ],
+                correct: 2,
+                explanation: "Os semimetais (como Silício e Germânio) possuem propriedades mistas, sendo semicondutores muito usados em eletrônica."
+            },
+            {
+                text: "Quem foi o cientista que criou a primeira tabela periódica organizada por massa atômica?",
+                options: [
+                    { letter: "A", text: "Niels Bohr" },
+                    { letter: "B", text: "Dmitri Mendeleev" },
+                    { letter: "C", text: "Antoine Lavoisier" },
+                    { letter: "D", text: "John Dalton" }
+                ],
+                correct: 1,
+                explanation: "Em 1869, Mendeleev organizou os elementos por massa atômica crescente e previu a existência de elementos ainda não descobertos."
+            }
+        ];
+    </script>
+
+    <!-- / Inclusão dos scripts do Firebase e lógica principal do site -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+</html>
+
+
+
+

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Sincronizador de Quizzes — Mollab</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #0f0c29; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .card { background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: center; max-width: 500px; }
+        .btn { background: #9d4ede; color: white; border: none; padding: 12px 24px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 1rem; }
+        .status { margin-top: 1rem; font-size: 0.9rem; color: #ccc; }
+        .success { color: #4ade80; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Sincronizador Mollab</h2>
+        <p>Este utilitário vai enviar as 90 perguntas (10 por quiz) para o seu Firebase Firestore agora mesmo.</p>
+        <button id="sync-btn" class="btn">Sincronizar Tudo Agora</button>
+        <div id="status" class="status">Aguardando comando...</div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+
+    <script>
+        const allQuizzes = {
+            "tabela-periodica": {
+                title: "Tabela Periódica",
+                questions: [
+                    { text: "Como os elementos são organizados na Tabela Periódica moderna?", options: [{letter: "A", text: "Ordem decrescente de massa"}, {letter: "B", text: "Ordem crescente de número atômico"}, {letter: "C", text: "Ordem alfabética de nomes"}, {letter: "D", text: "Pela col de cada elemento"}], correct: 1, explanation: "Diferente de Mendeleev, a tabela atual segue a ordem crescente do número de prótons." },
+                    { text: "O que as colunas verticais da tabela representam?", options: [{letter: "A", text: "Períodos"}, {letter: "B", text: "Famílias ou Grupos"}, {letter: "C", text: "Isótopos"}, {letter: "D", text: "Estados físicos"}], correct: 1, explanation: "As colunas verticais são chamadas de grupos ou famílias e reúnem elementos com propriedades químicas semelhantes." },
+                    { text: "Qual destes elementos é um Gás Nobre?", options: [{letter: "A", text: "Hidrogênio"}, {letter: "B", text: "Oxigênio"}, {letter: "C", text: "Hélio"}, {letter: "D", text: "Ferro"}], correct: 2, explanation: "O Hélio pertence ao Grupo 18, a família dos Gases Nobres." },
+                    { text: "A família dos Metais Alcalinos corresponde a qual grupo?", options: [{letter: "A", text: "Grupo 1"}, {letter: "B", text: "Grupo 2"}, {letter: "C", text: "Grupo 17"}, {letter: "D", text: "Grupo 18"}], correct: 0, explanation: "Os Metais Alcalinos pertencem ao Grupo 1." },
+                    { text: "Os Halogênios pertencem a qual grupo da tabela?", options: [{letter: "A", text: "Grupo 1"}, {letter: "B", text: "Grupo 14"}, {letter: "C", text: "Grupo 17"}, {letter: "D", text: "Grupo 18"}], correct: 2, explanation: "Os Halogênios (F, Cl, Br, I, At) estão no Grupo 17." },
+                    { text: "O que as linhas horizontais (períodos) indicam na tabela periódica?", options: [{letter: "A", text: "O número de camadas eletrônicas"}, {letter: "B", text: "O número de prótons"}, {letter: "C", text: "A massa atômica exata"}, {letter: "D", text: "A reatividade do elemento"}], correct: 0, explanation: "Cada período indica o número de camadas (níveis de energia)." },
+                    { text: "O que acontece com o raio atômico ao percorrer um período da esquerda para a direita?", options: [{letter: "A", text: "Aumenta"}, {letter: "B", text: "Permanece constante"}, {letter: "C", text: "Diminui"}, {letter: "D", text: "Dobra de tamanho"}], correct: 2, explanation: "O número de prótons aumenta, atraindo os elétrons com mais força e diminuindo o raio." },
+                    { text: "Qual propriedade periódica aumenta de baixo para cima e da esquerda para a direita?", options: [{letter: "A", text: "Raio atômico"}, {letter: "B", text: "Eletronegatividade"}, {letter: "C", text: "Caráter metálico"}, {letter: "D", text: "Reatividade dos metais"}], correct: 1, explanation: "A eletronegatividade cresce dessa forma. O Flúor é o elemento mais eletronegativo." },
+                    { text: "Os elementos classificados como semimetais possuem quais características?", options: [{letter: "A", text: "Só propriedades de metais"}, {letter: "B", text: "Só propriedades de ametais"}, {letter: "C", text: "Propriedades intermediárias"}, {letter: "D", text: "Nenhuma propriedade"}], correct: 2, explanation: "Possuem propriedades mistas, sendo semicondutores." },
+                    { text: "Quem criou a primeira tabela periódica organizada por massa atômica?", options: [{letter: "A", text: "Niels Bohr"}, {letter: "B", text: "Dmitri Mendeleev"}, {letter: "C", text: "Antoine Lavoisier"}, {letter: "D", text: "John Dalton"}], correct: 1, explanation: "Em 1869, Mendeleev organizou os elementos por massa atômica crescente." }
+                ]
+            },
+            "estrutura-atomica": {
+                title: "Estrutura Atômica",
+                questions: [
+                    { text: "Qual é a partícula subatômica com carga elétrica negativa?", options: [{letter: "A", text: "Próton"}, {letter: "B", text: "Nêutron"}, {letter: "C", text: "Elétron"}, {letter: "D", text: "Fóton"}], correct: 2, explanation: "Os elétrons orbitam o núcleo e têm carga negativa." },
+                    { text: "O que é o número atômico (Z) de um elemento?", options: [{letter: "A", text: "Nêutrons"}, {letter: "B", text: "Prótons"}, {letter: "C", text: "Soma de P+N"}, {letter: "D", text: "Elétrons"}], correct: 1, explanation: "Z corresponde ao número de prótons, sendo a identidade do átomo." },
+                    { text: "Qual modelo atômico introduziu a ideia de órbitas quantizadas?", options: [{letter: "A", text: "Dalton"}, {letter: "B", text: "Thomson"}, {letter: "C", text: "Rutherford"}, {letter: "D", text: "Bohr"}], correct: 3, explanation: "Bohr propôs que os elétrons giram em órbitas com energias definidas." },
+                    { text: "Íons com carga positiva são chamados de:", options: [{letter: "A", text: "Ânions"}, {letter: "B", text: "Cátions"}, {letter: "C", text: "Isótopos"}, {letter: "D", text: "Isóbaros"}], correct: 1, explanation: "Cátions perdem elétrons e ficam positivos." },
+                    { text: "O número de massa (A) é a soma de:", options: [{letter: "A", text: "Prótons e elétrons"}, {letter: "B", text: "Prótons e nêutrons"}, {letter: "C", text: "Elétrons e nêutrons"}, {letter: "D", text: "Apenas prótons"}], correct: 1, explanation: "A = Z + N." },
+                    { text: "Isótopos diferem no número de:", options: [{letter: "A", text: "Prótons"}, {letter: "B", text: "Elétrons"}, {letter: "C", text: "Nêutrons"}, {letter: "D", text: "Camadas"}], correct: 2, explanation: "Isótopos têm mesmo Z mas diferentes N." },
+                    { text: "O modelo de Thomson é conhecido como:", options: [{letter: "A", text: "Pudim de passas"}, {letter: "B", text: "Bola de bilhar"}, {letter: "C", text: "Planetário"}, {letter: "D", text: "Nuvem"}], correct: 0, explanation: "Thomson propôs uma esfera positiva com elétrons incrustados." },
+                    { text: "O que Rutherford descobriu com partículas alfa?", options: [{letter: "A", text: "Átomo maciço"}, {letter: "B", text: "Núcleo denso e positivo"}, {letter: "C", text: "Sem elétrons"}, {letter: "D", text: "Átomos iguais"}], correct: 1, explanation: "Descobriu o núcleo central positivo." },
+                    { text: "Distribuição do Sódio (Z=11) em K, L, M:", options: [{letter: "A", text: "2, 8, 1"}, {letter: "B", text: "2, 7, 2"}, {letter: "C", text: "2, 9, 0"}, {letter: "D", text: "8, 2, 1"}], correct: 0, explanation: "Tem 11 elétrons: 2 na K, 8 na L e 1 na M." },
+                    { text: "Qual partícula NÃO possui carga elétrica?", options: [{letter: "A", text: "Próton"}, {letter: "B", text: "Elétron"}, {letter: "C", text: "Nêutron"}, {letter: "D", text: "Pósitron"}], correct: 2, explanation: "O nêutron é eletricamente neutro." }
+                ]
+            },
+            "neutralizacao": {
+                title: "Neutralização",
+                questions: [
+                    { text: "Produtos de uma neutralização total:", options: [{letter: "A", text: "Sal e Água"}, {letter: "B", text: "Gás e Sólido"}, {letter: "C", text: "Ácido"}, {letter: "D", text: "Base"}], correct: 0, explanation: "H+ do ácido + OH- da base formam água e sal." },
+                    { text: "pH de solução neutra a 25°C:", options: [{letter: "A", text: "0"}, {letter: "B", text: "7"}, {letter: "C", text: "14"}, {letter: "D", text: "1"}], correct: 1, explanation: "pH 7 é o ponto neutro." },
+                    { text: "Fenolftaleína fica rosa em:", options: [{letter: "A", text: "Ácido"}, {letter: "B", text: "Base"}, {letter: "C", text: "Neutro"}, {letter: "D", text: "Vácuo"}], correct: 1, explanation: "Muda de incolor para rosa em bases." },
+                    { text: "HCl + NaOH → NaCl + H₂O é:", options: [{letter: "A", text: "Combustão"}, {letter: "B", text: "Neutralização"}, {letter: "C", text: "Oxidação"}, {letter: "D", text: "Decomposição"}], correct: 1, explanation: "Reação clássica entre ácido forte e base forte." },
+                    { text: "Ácido de Arrhenius libera:", options: [{letter: "A", text: "OH-"}, {letter: "B", text: "H+"}, {letter: "C", text: "Elétrons"}, {letter: "D", text: "Fótons"}], correct: 1, explanation: "Libera íons H+ em água." },
+                    { text: "Solução com pH = 3 é:", options: [{letter: "A", text: "Básica"}, {letter: "B", text: "Neutra"}, {letter: "C", text: "Ácida"}, {letter: "D", text: "Salina"}], correct: 2, explanation: "pH < 7 é ácido." },
+                    { text: "Papel tornassol azul fica vermelho com:", options: [{letter: "A", text: "Bases"}, {letter: "B", text: "Ácidos"}, {letter: "C", text: "Água"}, {letter: "D", text: "Sais"}], correct: 1, explanation: "Tornassol azul vira vermelho em ácidos." },
+                    { text: "O que é neutralização parcial?", options: [{letter: "A", text: "Completa"}, {letter: "B", text: "Excesso de H ou OH"}, {letter: "C", text: "Sem sal"}, {letter: "D", text: "Inercia"}], correct: 1, explanation: "Forma sal ácido ou básico." },
+                    { text: "Leite de magnésia é usado como antiácido porque:", options: [{letter: "A", text: "É ácido"}, {letter: "B", text: "É base"}, {letter: "C", text: "É neutro"}, {letter: "D", text: "É catalisador"}], correct: 1, explanation: "Neutraliza o HCl do estômago." },
+                    { text: "Escala de pH vai de:", options: [{letter: "A", text: "0 a 7"}, {letter: "B", text: "1 a 10"}, {letter: "C", text: "0 a 14"}, {letter: "D", text: "-7 a +7"}], correct: 2, explanation: "Escala padrão de 0 a 14." }
+                ]
+            },
+            "ligacoes-quimicas": {
+                title: "Ligações Químicas",
+                questions: [
+                    { text: "Regra do Octeto:", options: [{letter: "A", text: "2 elétrons"}, {letter: "B", text: "8 elétrons valência"}, {letter: "C", text: "8 prótons"}, {letter: "D", text: "8 átomos"}], correct: 1, explanation: "Átomos buscam 8 elétrons para estabilidade." },
+                    { text: "Transferência definitiva de elétrons:", options: [{letter: "A", text: "Covalente"}, {letter: "B", text: "Metálica"}, {letter: "C", text: "Iônica"}, {letter: "D", text: "Ponte H"}], correct: 2, explanation: "Metal doa para ametal na iônica." },
+                    { text: "Água (H₂O) tem ligação:", options: [{letter: "A", text: "Iônica"}, {letter: "B", text: "Covalente"}, {letter: "C", text: "Metálica"}, {letter: "D", text: "Ponte"}], correct: 1, explanation: "Compartilham elétrons entre H e O." },
+                    { text: "Ligação metálica:", options: [{letter: "A", text: "Compartilhamento"}, {letter: "B", text: "Transferência"}, {letter: "C", text: "Mar de elétrons"}, {letter: "D", text: "Pólos"}], correct: 2, explanation: "Elétrons livres entre cátions metálicos." },
+                    { text: "NaCl tem:", options: [{letter: "A", text: "Baixo ponto fusão"}, {letter: "B", text: "Alto ponto fusão"}, {letter: "C", text: "É gasoso"}, {letter: "D", text: "É maleável"}], correct: 1, explanation: "Cristal iônico com forte atração." },
+                    { text: "Covalente polar:", options: [{letter: "A", text: "Átomos iguais"}, {letter: "B", text: "Diferença eletronegatividade"}, {letter: "C", text: "Apolar"}, {letter: "D", text: "Iônica"}], correct: 1, explanation: "Compartilhamento desigual de elétrons." },
+                    { text: "Pontes de Hidrogênio são:", options: [{letter: "A", text: "Intramoleculares"}, {letter: "B", text: "Intermoleculares"}, {letter: "C", text: "Iônicas"}, {letter: "D", text: "Metálicas"}], correct: 1, explanation: "Interação entre moléculas (H + FON)." },
+                    { text: "Ligação dativa:", options: [{letter: "A", text: "Ambos doam"}, {letter: "B", text: "Um doa o par"}, {letter: "C", text: "Transferência"}, {letter: "D", text: "Nula"}], correct: 1, explanation: "Um átomo fornece os dois elétrons." },
+                    { text: "Eletronegatividade > 1,7 indica:", options: [{letter: "A", text: "Iônica"}, {letter: "B", text: "Covalente"}, {letter: "C", text: "Metálica"}, {letter: "D", text: "Nula"}], correct: 0, explanation: "Grande diferença gera ligação iônica." },
+                    { text: "Diamante tem ligação:", options: [{letter: "A", text: "Iônica"}, {letter: "B", text: "Metálica"}, {letter: "C", text: "Covalente"}, {letter: "D", text: "Van der Waals"}], correct: 2, explanation: "Rede tridimensional de ligações covalentes." }
+                ]
+            },
+            "hidrocarbonetos": {
+                title: "Hidrocarbonetos",
+                questions: [
+                    { text: "Alcano vs Alceno:", options: [{letter: "A", text: "Oxigênio"}, {letter: "B", text: "Ligação dupla"}, {letter: "C", text: "Nitrogênio"}, {letter: "D", text: "Iguais"}], correct: 1, explanation: "Alcenos têm ao menos uma dupla." },
+                    { text: "Metano (CH₄) é:", options: [{letter: "A", text: "Alceno"}, {letter: "B", text: "Alcino"}, {letter: "C", text: "Alcano"}, {letter: "D", text: "Aromático"}], correct: 2, explanation: "Apenas ligações simples." },
+                    { text: "Sufixo de alcinos:", options: [{letter: "A", text: "-ano"}, {letter: "B", text: "-eno"}, {letter: "C", text: "-ino"}, {letter: "D", text: "-ol"}], correct: 2, explanation: "Indica ligação tripla." },
+                    { text: "Compostos formados por:", options: [{letter: "A", text: "C e O"}, {letter: "B", text: "C e H"}, {letter: "C", text: "C e N"}, {letter: "D", text: "H e O"}], correct: 1, explanation: "Apenas Carbono e Hidrogênio." },
+                    { text: "Benzeno é:", options: [{letter: "A", text: "Alifático"}, {letter: "B", text: "Aromático"}, {letter: "C", text: "Cicloalcano"}, {letter: "D", text: "Alcino"}], correct: 1, explanation: "Anel com ressonância." },
+                    { text: "Fórmula geral Alcanos:", options: [{letter: "A", text: "CnH2n"}, {letter: "B", text: "CnH2n+2"}, {letter: "C", text: "CnH2n-2"}, {letter: "D", text: "CnHn"}], correct: 1, explanation: "Saturados." },
+                    { text: "Eteno (C₂H₄) é:", options: [{letter: "A", text: "Etano"}, {letter: "B", text: "Alceno"}, {letter: "C", text: "Alcino"}, {letter: "D", text: "Metano"}], correct: 1, explanation: "Possui uma dupla." },
+                    { text: "Cadeia ramificada tem:", options: [{letter: "A", text: "Primários"}, {letter: "B", text: "Terciários/Quaternários"}, {letter: "C", text: "Reta"}, {letter: "D", text: "Oxigênio"}], correct: 1, explanation: "Desvios na cadeia principal." },
+                    { text: "Prefixo 'prop-':", options: [{letter: "A", text: "1C"}, {letter: "B", text: "2C"}, {letter: "C", text: "3C"}, {letter: "D", text: "4C"}], correct: 2, explanation: "Indica 3 carbonos." },
+                    { text: "Fonte de Hidrocarbonetos:", options: [{letter: "A", text: "Sais"}, {letter: "B", text: "Petróleo"}, {letter: "C", text: "Proteína"}, {letter: "D", text: "Ácidos"}], correct: 1, explanation: "Petróleo é a principal fonte." }
+                ]
+            },
+            "funcoes-organicas": {
+                title: "Funções Orgânicas",
+                questions: [
+                    { text: "Prefixo -ol indica:", options: [{letter: "A", text: "Ácidos"}, {letter: "B", text: "Éteres"}, {letter: "C", text: "Álcoois"}, {letter: "D", text: "Sais"}], correct: 2, explanation: "Característico de álcoois." },
+                    { text: "Ácidos Carboxílicos têm:", options: [{letter: "A", text: "-OH"}, {letter: "B", text: "-CHO"}, {letter: "C", text: "-COOH"}, {letter: "D", text: "-O-"}], correct: 2, explanation: "Grupo carboxila." },
+                    { text: "Acetona é:", options: [{letter: "A", text: "Aldeído"}, {letter: "B", text: "Cetona"}, {letter: "C", text: "Éster"}, {letter: "D", text: "Fenol"}], correct: 1, explanation: "Propanona é uma cetona." },
+                    { text: "Aldeído vs Cetona:", options: [{letter: "A", text: "Sem O"}, {letter: "B", text: "CHO na ponta"}, {letter: "C", text: "CO na ponta"}, {letter: "D", text: "Iguais"}], correct: 1, explanation: "Aldeído tem carbonila terminal." },
+                    { text: "Éter tem:", options: [{letter: "A", text: "-OH"}, {letter: "B", text: "R-O-R"}, {letter: "C", text: "-COOH"}, {letter: "D", text: "Amônia"}], correct: 1, explanation: "O entre dois carbonos." },
+                    { text: "Aminas têm:", options: [{letter: "A", text: "S"}, {letter: "B", text: "N"}, {letter: "C", text: "P"}, {letter: "D", text: "Cl"}], correct: 1, explanation: "Derivados de NH3." },
+                    { text: "Fenol tem -OH em:", options: [{letter: "A", text: "Carbono simples"}, {letter: "B", text: "Anel aromático"}, {letter: "C", text: "N"}, {letter: "D", text: "3C"}], correct: 1, explanation: "Hidroxila direta no benzeno." },
+                    { text: "Ésteres vêm de:", options: [{letter: "A", text: "Alcool+Alcool"}, {letter: "B", text: "Ácido+Álcool"}, {letter: "C", text: "Amina+Ácido"}, {letter: "D", text: "2 Aldeídos"}], correct: 1, explanation: "Esterificação." },
+                    { text: "Vinagre tem:", options: [{letter: "A", text: "Álcool"}, {letter: "B", text: "Cetona"}, {letter: "C", text: "Ácido Carbox"}, {letter: "D", text: "Éster"}], correct: 2, explanation: "Ácido acético." },
+                    { text: "Formaldeído é:", options: [{letter: "A", text: "Cetona"}, {letter: "B", text: "Éster"}, {letter: "C", text: "Aldeído"}, {letter: "D", text: "Álcool"}], correct: 2, explanation: "Metanal." }
+                ]
+            },
+            "termoquimica": {
+                title: "Termoquímica",
+                questions: [
+                    { text: "Reação que libera calor:", options: [{letter: "A", text: "Endo"}, {letter: "B", text: "Iso"}, {letter: "C", text: "Exo"}, {letter: "D", text: "Adia"}], correct: 2, explanation: "Exotérmica libera energia." },
+                    { text: "ΔH negativo:", options: [{letter: "A", text: "Absorve"}, {letter: "B", text: "Libera"}, {letter: "C", text: "Erro"}, {letter: "D", text: "Constante"}], correct: 1, explanation: "Exotérmica." },
+                    { text: "Madeira queimando:", options: [{letter: "A", text: "Endo"}, {letter: "B", text: "Exo"}, {letter: "C", text: "Neutro"}, {letter: "D", text: "Isolante"}], correct: 1, explanation: "Combustão libera calor." },
+                    { text: "Lei de Hess:", options: [{letter: "A", text: "Depende caminho"}, {letter: "B", text: "Inicial e Final"}, {letter: "C", text: "Falsa"}, {letter: "D", text: "Positiva"}], correct: 1, explanation: "Estado inicial/final importa." },
+                    { text: "Fotossíntese é:", options: [{letter: "A", text: "Exo"}, {letter: "B", text: "Endo"}, {letter: "C", text: "Nula"}, {letter: "D", text: "Bio"}], correct: 1, explanation: "Absorve luz solar." },
+                    { text: "H formação subst. simples:", options: [{letter: "A", text: "+"}, {letter: "B", text: "-"}, {letter: "C", text: "0"}, {letter: "D", text: "?"}], correct: 2, explanation: "Padronizado como zero." },
+                    { text: "Unidade H:", options: [{letter: "A", text: "W"}, {letter: "B", text: "kJ/mol"}, {letter: "C", text: "°C"}, {letter: "D", text: "M"}], correct: 1, explanation: "Quilojoules por mol." },
+                    { text: "Calor vs Temp:", options: [{letter: "A", text: "Iguais"}, {letter: "B", text: "Energia vs Agitação"}, {letter: "C", text: "Oposto"}, {letter: "D", text: "Vácuo"}], correct: 1, explanation: "Definições distintas." },
+                    { text: "Dissolução NaOH:", options: [{letter: "A", text: "Endo"}, {letter: "B", text: "Exo"}, {letter: "C", text: "Neutro"}, {letter: "D", text: "Sais"}], correct: 1, explanation: "Aquece a solução." },
+                    { text: "Energia de ativação:", options: [{letter: "A", text: "Final"}, {letter: "B", text: "Mínima p/ iniciar"}, {letter: "C", text: "Total"}, {letter: "D", text: "Luz"}], correct: 1, explanation: "Barreira energética." }
+                ]
+            },
+            "cinetica-quimica": {
+                title: "Cinética Química",
+                questions: [
+                    { text: "Catalisador faz:", options: [{letter: "A", text: "Sobe ΔH"}, {letter: "B", text: "Desce Ea"}, {letter: "C", text: "É comsumido"}, {letter: "D", text: "Endo"}], correct: 1, explanation: "Diminui barreira de energia." },
+                    { text: "Temp sobe = Velocidade:", options: [{letter: "A", text: "Desce"}, {letter: "B", text: "Sobe"}, {letter: "C", text: "Igual"}, {letter: "D", text: "Para"}], correct: 1, explanation: "Mais colisões." },
+                    { text: "Colisão efetiva:", options: [{letter: "A", text: "Contato"}, {letter: "B", text: "Orientação e Energia"}, {letter: "C", text: "Luz"}, {letter: "D", text: "Líquido"}], correct: 1, explanation: "Geometria e Ea." },
+                    { text: "Mais concentração:", options: [{letter: "A", text: "Lento"}, {letter: "B", text: "Igual"}, {letter: "C", text: "Rápido"}, {letter: "D", text: "Inverte"}], correct: 2, explanation: "Frequência de colisões." },
+                    { text: "Remédio triturado:", options: [{letter: "A", text: "Quimica"}, {letter: "B", text: "Superfície contato"}, {letter: "C", text: "Temp"}, {letter: "D", text: "Catalisador"}], correct: 1, explanation: "Dissolve mais rápido." },
+                    { text: "Inibidor:", options: [{letter: "A", text: "Acelera"}, {letter: "B", text: "Retarda"}, {letter: "C", text: "Substancia"}, {letter: "D", text: "Gás"}], correct: 1, explanation: "Oposto do catalisador." },
+                    { text: "Enzimas são:", options: [{letter: "A", text: "Metais"}, {letter: "B", text: "Proteínas"}, {letter: "C", text: "Doces"}, {letter: "D", text: "Gordura"}], correct: 1, explanation: "Catalisadores biológicos." },
+                    { text: "Velocidade medida por:", options: [{letter: "A", text: "Temp"}, {letter: "B", text: "Variação concentração"}, {letter: "C", text: "Pressão"}, {letter: "D", text: "Sais"}], correct: 1, explanation: "Concentração/Tempo." },
+                    { text: "Van't Hoff +10°C:", options: [{letter: "A", text: "/2"}, {letter: "B", text: "x2 ou x3"}, {letter: "C", text: "0"}, {letter: "D", text: "Fim"}], correct: 1, explanation: "Aproximadamente dobra." },
+                    { text: "1ª ordem, conc x2:", options: [{letter: "A", text: "1x"}, {letter: "B", text: "2x"}, {letter: "C", text: "4x"}, {letter: "D", text: "3x"}], correct: 1, explanation: "Proporcional." }
+                ]
+            },
+            "balancamento": {
+                title: "Balanceamento",
+                questions: [
+                    { text: "Lei massas:", options: [{letter: "A", text: "Dalton"}, {letter: "B", text: "Lavoisier"}, {letter: "C", text: "Proust"}, {letter: "D", text: "Rutherford"}], correct: 1, explanation: "Pai da química moderna." },
+                    { text: "H2+O2 -> H2O:", options: [{letter: "A", text: "111"}, {letter: "B", text: "212"}, {letter: "C", text: "121"}, {letter: "D", text: "222"}], correct: 1, explanation: "2 1 2." },
+                    { text: "Coeficiente indica:", options: [{letter: "A", text: "Atomos"}, {letter: "B", text: "Moças/Mols"}, {letter: "C", text: "Temp"}, {letter: "D", text: "Estado"}], correct: 1, explanation: "Proporção." },
+                    { text: "Posso mudar:", options: [{letter: "A", text: "Indices"}, {letter: "B", text: "Coeficientes"}, {letter: "C", text: "Simbolos"}, {letter: "D", text: "Reação"}], correct: 1, explanation: "Apenas números grandes." },
+                    { text: "N2 + 3H2 -> 2NH3:", options: [{letter: "A", text: "1"}, {letter: "B", text: "2"}, {letter: "C", text: "3"}, {letter: "D", text: "6"}], correct: 2, explanation: "3 mols de H2." },
+                    { text: "Método comum:", options: [{letter: "A", text: "Algebra"}, {letter: "B", text: "Tentativa"}, {letter: "C", text: "Queima"}, {letter: "D", text: "Filtro"}], correct: 1, explanation: "Inspeção." },
+                    { text: "Fe + O2 -> Fe2O3:", options: [{letter: "A", text: "2+1"}, {letter: "B", text: "4+3->2"}, {letter: "C", text: "1+3"}, {letter: "D", text: "3+2"}], correct: 1, explanation: "4 3 2." },
+                    { text: "Equation OK means:", options: [{letter: "A", text: "R=P"}, {letter: "B", text: "Atomos iguais"}, {letter: "C", text: "Zero"}, {letter: "D", text: "Sais"}], correct: 1, explanation: "Conservação." },
+                    { text: "Questão O2 em CH4:", options: [{letter: "A", text: "2"}, {letter: "B", text: "3"}, {letter: "C", text: "4"}, {letter: "D", text: "6"}], correct: 2, explanation: "4 atomos." },
+                    { text: "Proust diz:", options: [{letter: "A", text: "Massas"}, {letter: "B", text: "Proporção fixa"}, {letter: "C", text: "Gases"}, {letter: "D", text: "Nums"}], correct: 1, explanation: "Lei proporções definidas." }
+                ]
+            }
+        };
+
+        const syncBtn = document.getElementById('sync-btn');
+        const statusDiv = document.getElementById('status');
+
+        syncBtn.addEventListener('click', async () => {
+            syncBtn.disabled = true;
+            statusDiv.innerHTML = "⏳ Iniciando sincronização...";
+            
+            try {
+                // Verifica login
+                const user = firebase.auth().currentUser;
+                if (!user) {
+                    statusDiv.innerHTML = "❌ Erro: Você precisa estar logado como Admin. Faça login no site primeiro.";
+                    syncBtn.disabled = false;
+                    return;
+                }
+
+                let completed = 0;
+                const total = Object.keys(allQuizzes).length;
+
+                for (const quizId in allQuizzes) {
+                    await dbOperations.saveQuizDataAdmin(quizId, allQuizzes[quizId]);
+                    completed++;
+                    statusDiv.innerHTML = `⏳ Sincronizando: ${completed}/${total} quizzes concluídos...`;
+                }
+
+                statusDiv.innerHTML = "✅ 90 Perguntas Sincronizadas com Sucesso!<br>Pode fechar esta página e testar os quizzes.";
+                statusDiv.classList.add('success');
+            } catch (error) {
+                console.error(error);
+                statusDiv.innerHTML = "❌ Erro: " + error.message;
+                syncBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+

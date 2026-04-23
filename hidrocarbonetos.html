@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- / Cabeçalho com metadados -->
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hidrocarbonetos — Mollab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <!-- / Topo com navegação padrão -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="home.html" class="logo">
+                <span class="logo-text">Mollab</span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="home.html">Início</a>
+                <a href="disciplinas.html" class="active">Disciplinas</a>
+                <a href="experimentos.html">Experimentos</a>
+                <a href="sobre.html">Sobre</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon" id="theme-toggle" aria-label="Alternar Tema">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    
+
+    <!-- / Hero: Título da disciplina -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Hidrocarbonetos</h1>
+            <p>Os compostos fundamentais da química orgânica, formados apenas por carbono e hidrogênio.</p>
+        </div>
+    </section>
+
+    <!-- / Bloco de conteúdo sobre classificação de cadeias -->
+    <section class="container">
+        <div class="demo-block">
+            <div class="demo-header">
+                <h2>Cadeias de Carbono</h2>
+                <p>Estude os alcanos, alcenos e alcinos, bases da indústria petroquímica e de combustíveis.</p>
+            </div>
+
+            <div class="demo-body">
+                <div class="demo-content">
+                    <div class="concept-section">
+                        <h3>O que são?</h3>
+                        <p>Os hidrocarbonetos são compostos por átomos de <strong>Carbono e Hidrogênio</strong>. Eles
+                            são classificados conforme as ligações entre carbonos: <strong>Alcanos</strong> (simples),
+                            <strong>Alcenos</strong> (duplas) e <strong>Alcinos</strong> (triplas).
+                        </p>
+                    </div>
+
+                    <!-- / Quiz renderizado pelo script.js -->
+                    <div class="quiz-box" id="quiz"></div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- / Rodapé padrão -->
+    <footer class="footer footer-centered">
+        <div class="container footer-bottom">
+            © 2026 Mollab.
+        </div>
+    </footer>
+
+    <script>
+        /* / Banco de perguntas específico para Hidrocarbonetos */
+        window.quizQuestions = [
+            {
+                text: "Qual é a principal diferença entre um alcano e um alceno?",
+                options: [
+                    { letter: "A", text: "Alcanos têm oxigênio" },
+                    { letter: "B", text: "Alcenos possuem ao menos uma ligação dupla" },
+                    { letter: "C", text: "Alcanos são formados por nitrogênio" },
+                    { letter: "D", text: "Não há diferença" }
+                ],
+                correct: 1,
+                explanation: "Alcenos são hidrocarbonetos insaturados que contêm pelo menos uma ligação dupla entre átomos de carbono."
+            },
+            {
+                text: "O metano (CH₄) pertence a qual classe?",
+                options: [
+                    { letter: "A", text: "Alceno" },
+                    { letter: "B", text: "Alcino" },
+                    { letter: "C", text: "Alcano" },
+                    { letter: "D", text: "Aromático" }
+                ],
+                correct: 2,
+                explanation: "O metano possui apenas ligações simples entre o carbono e os hidrogênios, sendo o alcano mais simples."
+            },
+            {
+                text: "Qual o sufixo utilizado na nomenclatura de alcinos?",
+                options: [
+                    { letter: "A", text: "-ano" },
+                    { letter: "B", text: "-eno" },
+                    { letter: "C", text: "-ino" },
+                    { letter: "D", text: "-ol" }
+                ],
+                correct: 2,
+                explanation: "Seguindo a regra da IUPAC, o sufixo -ino identifica os hidrocarbonetos que possuem ligações triplas."
+            },
+            {
+                text: "Hidrocarbonetos são compostos formados apenas por quais elementos?",
+                options: [
+                    { letter: "A", text: "Carbono e Oxigênio" },
+                    { letter: "B", text: "Carbono e Hidrogênio" },
+                    { letter: "C", text: "Carbono e Nitrogênio" },
+                    { letter: "D", text: "Hidrogênio e Oxigênio" }
+                ],
+                correct: 1,
+                explanation: "Como o próprio nome indica, hidrocarbonetos são compostos formados exclusivamente por Carbono (C) e Hidrogênio (H)."
+            },
+            {
+                text: "O benzeno (C₆H₆) é classificado como um hidrocarboneto:",
+                options: [
+                    { letter: "A", text: "Alifático" },
+                    { letter: "B", text: "Aromático" },
+                    { letter: "C", text: "Alcano cíclico" },
+                    { letter: "D", text: "Alcino" }
+                ],
+                correct: 1,
+                explanation: "O benzeno possui um anel de 6 carbonos com ligações alternadas (ressonância), sendo o hidrocarboneto aromático mais simples."
+            },
+            {
+                text: "A fórmula geral dos alcanos é:",
+                options: [
+                    { letter: "A", text: "CₙH₂ₙ" },
+                    { letter: "B", text: "CₙH₂ₙ₊₂" },
+                    { letter: "C", text: "CₙH₂ₙ₋₂" },
+                    { letter: "D", text: "CₙHₙ" }
+                ],
+                correct: 1,
+                explanation: "Os alcanos seguem a fórmula CₙH₂ₙ₊₂, onde n é o número de carbonos. Ex: Metano (CH₄), Etano (C₂H₆)."
+            },
+            {
+                text: "Qual destes é um alceno?",
+                options: [
+                    { letter: "A", text: "Etano (C₂H₆)" },
+                    { letter: "B", text: "Eteno (C₂H₄)" },
+                    { letter: "C", text: "Etino (C₂H₂)" },
+                    { letter: "D", text: "Metano (CH₄)" }
+                ],
+                correct: 1,
+                explanation: "O eteno (etileno) possui uma ligação dupla entre os dois carbonos, sendo classificado como alceno."
+            },
+            {
+                text: "Uma cadeia carbônica ramificada é aquela que:",
+                options: [
+                    { letter: "A", text: "Possui apenas carbonos primários" },
+                    { letter: "B", text: "Possui pelo menos um carbono terciário ou quaternário" },
+                    { letter: "C", text: "É formada em linha reta sem desvios" },
+                    { letter: "D", text: "Contém oxigênio na cadeia" }
+                ],
+                correct: 1,
+                explanation: "Cadeias ramificadas possuem pelo menos um carbono terciário (ligado a 3 outros C) ou quaternário (ligado a 4 outros C)."
+            },
+            {
+                text: "O prefixo 'prop-' na nomenclatura IUPAC indica quantos carbonos?",
+                options: [
+                    { letter: "A", text: "1 carbono" },
+                    { letter: "B", text: "2 carbonos" },
+                    { letter: "C", text: "3 carbonos" },
+                    { letter: "D", text: "4 carbonos" }
+                ],
+                correct: 2,
+                explanation: "Os prefixos indicam o número de carbonos: met (1), et (2), prop (3), but (4), pent (5)."
+            },
+            {
+                text: "O petróleo é uma fonte natural principalmente de:",
+                options: [
+                    { letter: "A", text: "Sais minerais" },
+                    { letter: "B", text: "Hidrocarbonetos" },
+                    { letter: "C", text: "Proteínas" },
+                    { letter: "D", text: "Ácidos orgânicos" }
+                ],
+                correct: 1,
+                explanation: "O petróleo é uma mistura complexa de hidrocarbonetos formada ao longo de milhões de anos pela decomposição de matéria orgânica."
+            }
+        ];
+    </script>
+
+    <!-- / Carregamento dos scripts base -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
+
+

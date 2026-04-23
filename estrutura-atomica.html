@@ -1,0 +1,219 @@
+
+<html >
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estrutura Atômica — Mollab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <!-- / Topo com navegação padrão -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="home.html" class="logo">
+                <span class="logo-text">Mollab</span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="home.html">Início</a>
+                <a href="disciplinas.html" class="active">Disciplinas</a>
+                <a href="experimentos.html">Experimentos</a>
+                <a href="sobre.html">Sobre</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon" id="theme-toggle" aria-label="Alternar Tema">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    
+
+    <!-- / Hero: Título da disciplina -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Estrutura Atômica</h1>
+            <p>Descubra como os átomos são formados e entenda o papel das partículas subatômicas na composição da
+                matéria.</p>
+        </div>
+    </section>
+
+    <!-- / Bloco de conteúdo teórico sobre átomos -->
+    <section class="container">
+        <div class="demo-block">
+            <div class="demo-header">
+                <h2>Conceitos e Modelos</h2>
+                <p>O átomo é a unidade básica da matéria, composta por partículas ainda menores que definem tudo o que
+                    vemos.</p>
+            </div>
+
+            <div class="demo-body">
+                <div class="demo-content">
+                    <div class="concept-section">
+                        <h3>Conceito Fundamental</h3>
+                        <p>Toda matéria é composta por <strong>átomos</strong>. Um átomo consiste em um núcleo central
+                            denso, contendo <strong>prótons</strong> (carga positiva) e <strong>nêutrons</strong> (sem
+                            carga), cercado por uma nuvem de <strong>elétrons</strong> (carga negativa).</p>
+                    </div>
+
+                    <!-- / Quiz renderizado dinamicamente pelo script.js -->
+                    <div class="quiz-box" id="quiz"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- / Rodapé padrão -->
+    <footer class="footer footer-centered">
+        <div class="container footer-bottom">
+            © 2026 Mollab.
+        </div>
+    </footer>
+
+    <script>
+        /* / Banco de perguntas específico para Estrutura Atômica */
+        window.quizQuestions = [
+            {
+                text: "Qual é a partícula subatômica com carga elétrica negativa?",
+                options: [
+                    { letter: "A", text: "Próton" },
+                    { letter: "B", text: "Nêutron" },
+                    { letter: "C", text: "Elétron" },
+                    { letter: "D", text: "Fóton" }
+                ],
+                correct: 2,
+                explanation: "Os elétrons são partículas subatômicas com carga elétrica negativa que orbitam o núcleo do átomo."
+            },
+            {
+                text: "O que é o número atômico (Z) de um elemento?",
+                options: [
+                    { letter: "A", text: "O número de nêutrons no núcleo" },
+                    { letter: "B", text: "O número de prótons no núcleo" },
+                    { letter: "C", text: "A soma de prótons e nêutrons" },
+                    { letter: "D", text: "O número de elétrons na eletrosfera" }
+                ],
+                correct: 1,
+                explanation: "O número atômico (Z) corresponde ao número de prótons no núcleo, sendo a identidade de cada elemento químico."
+            },
+            {
+                text: "Qual modelo atômico introduziu a ideia de órbitas quantizadas?",
+                options: [
+                    { letter: "A", text: "Modelo de Dalton" },
+                    { letter: "B", text: "Modelo de Thomson" },
+                    { letter: "C", text: "Modelo de Rutherford" },
+                    { letter: "D", text: "Modelo de Bohr" }
+                ],
+                correct: 3,
+                explanation: "Niels Bohr propôs que os elétrons giram em órbitas com energias definidas (quantizadas) ao redor do núcleo."
+            },
+            {
+                text: "Íons com carga positiva são chamados de:",
+                options: [
+                    { letter: "A", text: "Ânions" },
+                    { letter: "B", text: "Cátions" },
+                    { letter: "C", text: "Isótopos" },
+                    { letter: "D", text: "Isóbaros" }
+                ],
+                correct: 1,
+                explanation: "Cátions são átomos que perderam elétrons, ficando com carga positiva. Ânions são o oposto (carga negativa)."
+            },
+            {
+                text: "O número de massa (A) de um átomo é calculado pela soma de:",
+                options: [
+                    { letter: "A", text: "Prótons e elétrons" },
+                    { letter: "B", text: "Prótons e nêutrons" },
+                    { letter: "C", text: "Elétrons e nêutrons" },
+                    { letter: "D", text: "Apenas prótons" }
+                ],
+                correct: 1,
+                explanation: "O número de massa (A) é a soma do número de prótons (Z) com o número de nêutrons (N). A = Z + N."
+            },
+            {
+                text: "Isótopos são átomos de um mesmo elemento que diferem no número de:",
+                options: [
+                    { letter: "A", text: "Prótons" },
+                    { letter: "B", text: "Elétrons" },
+                    { letter: "C", text: "Nêutrons" },
+                    { letter: "D", text: "Camadas eletrônicas" }
+                ],
+                correct: 2,
+                explanation: "Isótopos possuem o mesmo número de prótons (mesmo elemento) mas diferentes quantidades de nêutrons. Exemplo: Carbono-12 e Carbono-14."
+            },
+            {
+                text: "O modelo atômico de Thomson é conhecido como:",
+                options: [
+                    { letter: "A", text: "Pudim de passas" },
+                    { letter: "B", text: "Bola de bilhar" },
+                    { letter: "C", text: "Sistema planetário" },
+                    { letter: "D", text: "Nuvem eletrônica" }
+                ],
+                correct: 0,
+                explanation: "Thomson propôs o modelo 'pudim de passas': uma esfera positiva com elétrons negativos incrustados, como as passas em um pudim."
+            },
+            {
+                text: "No experimento de Rutherford com partículas alfa, o que foi descoberto?",
+                options: [
+                    { letter: "A", text: "Que o átomo é maciço e indivisível" },
+                    { letter: "B", text: "Que o átomo possui um núcleo denso e positivo" },
+                    { letter: "C", text: "Que os elétrons não existem" },
+                    { letter: "D", text: "Que átomos são todos iguais" }
+                ],
+                correct: 1,
+                explanation: "Rutherford descobriu que o átomo tem um núcleo muito pequeno e denso com carga positiva, com elétrons ao redor em um grande espaço vazio."
+            },
+            {
+                text: "A distribuição eletrônica do Sódio (Z=11) na ordem K, L, M é:",
+                options: [
+                    { letter: "A", text: "2, 8, 1" },
+                    { letter: "B", text: "2, 7, 2" },
+                    { letter: "C", text: "2, 9, 0" },
+                    { letter: "D", text: "8, 2, 1" }
+                ],
+                correct: 0,
+                explanation: "O Sódio tem 11 elétrons distribuídos: 2 na camada K, 8 na camada L e 1 na camada M (valência)."
+            },
+            {
+                text: "Qual partícula subatômica NÃO possui carga elétrica?",
+                options: [
+                    { letter: "A", text: "Próton" },
+                    { letter: "B", text: "Elétron" },
+                    { letter: "C", text: "Nêutron" },
+                    { letter: "D", text: "Pósitron" }
+                ],
+                correct: 2,
+                explanation: "O nêutron é eletricamente neutro (sem carga). Prótons têm carga positiva e elétrons têm carga negativa."
+            }
+        ];
+    </script>
+
+    <!-- / Carregamento dos scripts base -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
+
+

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Balanceamento Químico — Mollab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+</head>
+
+<body>
+    <!-- / Topo com navegação padrão -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="home.html" class="logo">
+                <span class="logo-text">Mollab</span>
+            </a>
+            <nav class="nav-desktop">
+                <a href="home.html">Início</a>
+                <a href="disciplinas.html">Disciplinas</a>
+                <a href="experimentos.html" class="active">Experimentos</a>
+                <a href="sobre.html">Sobre</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn-icon" id="theme-toggle" aria-label="Alternar Tema">
+                    <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                            d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                    </svg>
+                </button>
+                <a href="index.html" class="btn-login">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <span>Entrar</span>
+                </a>
+                <button class="btn-icon menu-toggle" aria-label="Menu"
+                    onclick="document.getElementById('mobile-nav').classList.toggle('open')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" x2="20" y1="12" y2="12" />
+                        <line x1="4" x2="20" y1="6" y2="6" />
+                        <line x1="4" x2="20" y1="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <nav class="nav-mobile" id="mobile-nav">
+            <a href="home.html">Início</a>
+            <a href="disciplinas.html">Disciplinas</a>
+            <a href="experimentos.html">Experimentos</a>
+            <a href="sobre.html">Sobre</a>
+        </nav>
+    </header>
+
+    
+
+    <!-- / Hero: Título da experiência -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Balanceamento <span class="text-purple">Químico</span></h1>
+            <p>Aprenda a balancear equações químicas de forma prática e visual com este simulador.</p>
+        </div>
+    </section>
+
+    <!-- / Área do simulador Godot e controles -->
+    <section class="container">
+        <div class="game-container">
+            <!-- / Iframe que carrega o simulador exportado em HTML5 -->
+            <iframe src="expotado/jogo/index.html" allowfullscreen></iframe>
+        </div>
+
+        <div class="game-controls">
+            <button class="btn-fullscreen" onclick="toggleFullScreen()">Tela Cheia</button>
+        </div>
+
+        <!-- / Explicação teórica sobre o experimento -->
+        <div class="game-info-block">
+            <h2>Sobre este experimento</h2>
+            <p>O balanceamento de equações químicas é fundamental para respeitar a Lei de Conservação das Massas (Lei de
+                Lavoisier). Nesta simulação, você deve garantir que o número de átomos de cada elemento seja o mesmo nos
+                reagentes e nos produtos.</p>
+
+            <h2>Como jogar</h2>
+            <p>Utilize os controles integrados no simulador para ajustar os coeficientes estequiométricos das reações
+                apresentadas. Observe as mudanças em tempo real e verifique se a equação está correta.</p>
+        </div>
+
+        <!-- / Seção de Desafio: Quiz relacionado ao tema -->
+        <div class="demo-block">
+            <div class="demo-header">
+                <h2>Teste seu Conhecimento</h2>
+                <p>Responda às perguntas sobre balanceamento e estequiometria.</p>
+            </div>
+            <div class="demo-content">
+                <div class="quiz-box" id="quiz"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- / Rodapé específico do simulador -->
+    <footer class="footer footer-centered">
+        <div class="container footer-bottom">
+            © 2026 Mollab. Desenvolvido com Godot Engine.
+        </div>
+    </footer>
+
+    <script>
+        /* / Função para alternar o simulador para tela cheia */
+        function toggleFullScreen() {
+            let iframe = document.querySelector('iframe');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) { /* Safari */
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) { /* IE11 */
+                iframe.msRequestFullscreen();
+            }
+        }
+
+        /* / Banco de perguntas do quiz específico desta página */
+        window.quizQuestions = [
+            {
+                text: "Quem enunciou a Lei da Conservação das Massas (Na natureza nada se cria...)?",
+                options: [
+                    { letter: "A", text: "Dalton" },
+                    { letter: "B", text: "Lavoisier" },
+                    { letter: "C", text: "Proust" },
+                    { letter: "D", text: "Rutherford" }
+                ],
+                correct: 1,
+                explanation: "Antoine Lavoisier afirmou que em um sistema fechado, a massa total dos reagentes é igual à massa total dos produtos."
+            },
+            {
+                text: "No balanceamento da equação H₂ + O₂ -> H₂O, quais são os coeficientes corretos?",
+                options: [
+                    { letter: "A", text: "1, 1, 1" },
+                    { letter: "B", text: "2, 1, 2" },
+                    { letter: "C", text: "1, 2, 1" },
+                    { letter: "D", text: "2, 2, 2" }
+                ],
+                correct: 1,
+                explanation: "2H₂ + O₂ -> 2H₂O. Temos 4 hidrogênios e 2 oxigênios de cada lado."
+            },
+            {
+                text: "O que indica o coeficiente estequiométrico?",
+                options: [
+                    { letter: "A", text: "O número de átomos na molécula" },
+                    { letter: "B", text: "O número de moléculas (ou mols) que participam da reação" },
+                    { letter: "C", text: "A temperatura da reação" },
+                    { letter: "D", text: "O estado físico da substância" }
+                ],
+                correct: 1,
+                explanation: "Os coeficientes (números grandes à esquerda) indicam a proporção em mols/moléculas da substância."
+            },
+            {
+                text: "Para balancear uma equação, podemos alterar:",
+                options: [
+                    { letter: "A", text: "Os índices (subscritos) das fórmulas" },
+                    { letter: "B", text: "Os coeficientes estequiométricos" },
+                    { letter: "C", text: "Os símbolos dos elementos" },
+                    { letter: "D", text: "O tipo de reação" }
+                ],
+                correct: 1,
+                explanation: "Ao balancear, ajustamos apenas os coeficientes na frente das fórmulas. Nunca alteramos os índices, pois isso mudaria a substância."
+            },
+            {
+                text: "Na equação balanceada: N₂ + 3H₂ → 2NH₃, quantos mols de H₂ reagem com 1 mol de N₂?",
+                options: [
+                    { letter: "A", text: "1 mol" },
+                    { letter: "B", text: "2 mols" },
+                    { letter: "C", text: "3 mols" },
+                    { letter: "D", text: "6 mols" }
+                ],
+                correct: 2,
+                explanation: "O coeficiente 3 na frente do H₂ indica que são necessários 3 mols de hidrogênio para cada 1 mol de nitrogênio."
+            },
+            {
+                text: "Qual é o método mais comum para balancear equações simples?",
+                options: [
+                    { letter: "A", text: "Método algébrico" },
+                    { letter: "B", text: "Método da tentativa (balanceamento por inspeção)" },
+                    { letter: "C", text: "Método da combustão" },
+                    { letter: "D", text: "Método da destilação" }
+                ],
+                correct: 1,
+                explanation: "O método por tentativa (inspeção visual) é o mais usado para equações simples: ajustamos os coeficientes até igualar os átomos nos dois lados."
+            },
+            {
+                text: "A equação Fe + O₂ → Fe₂O₃ balanceada fica:",
+                options: [
+                    { letter: "A", text: "2Fe + O₂ → Fe₂O₃" },
+                    { letter: "B", text: "4Fe + 3O₂ → 2Fe₂O₃" },
+                    { letter: "C", text: "Fe + 3O₂ → Fe₂O₃" },
+                    { letter: "D", text: "3Fe + 2O₂ → Fe₂O₃" }
+                ],
+                correct: 1,
+                explanation: "4Fe + 3O₂ → 2Fe₂O₃. Verificando: 4 ferros e 6 oxigênios dos dois lados."
+            },
+            {
+                text: "O que significa uma equação química estar balanceada?",
+                options: [
+                    { letter: "A", text: "Que os reagentes são iguais aos produtos" },
+                    { letter: "B", text: "Que o número de átomos de cada elemento é igual nos dois lados" },
+                    { letter: "C", text: "Que a reação não ocorre" },
+                    { letter: "D", text: "Que todos os coeficientes são 1" }
+                ],
+                correct: 1,
+                explanation: "Uma equação balanceada respeita a conservação da matéria: a quantidade de átomos de cada elemento é a mesma nos reagentes e nos produtos."
+            },
+            {
+                text: "Na reação de combustão completa do metano: CH₄ + 2O₂ → CO₂ + 2H₂O, o número total de átomos de oxigênio nos produtos é:",
+                options: [
+                    { letter: "A", text: "2" },
+                    { letter: "B", text: "3" },
+                    { letter: "C", text: "4" },
+                    { letter: "D", text: "6" }
+                ],
+                correct: 2,
+                explanation: "CO₂ tem 2 oxigênios + 2H₂O tem 2 oxigênios = 4 átomos de oxigênio no total nos produtos. Igual ao dos reagentes (2O₂ = 4 oxigênios)."
+            },
+            {
+                text: "A Lei das Proporções Definidas (Lei de Proust) afirma que:",
+                options: [
+                    { letter: "A", text: "Massas se conservam nas reações" },
+                    { letter: "B", text: "Uma substância tem composição fixa, independente da origem" },
+                    { letter: "C", text: "As reações sempre produzem gases" },
+                    { letter: "D", text: "Coeficientes são sempre inteiros" }
+                ],
+                correct: 1,
+                explanation: "Proust descobriu que uma substância pura sempre tem a mesma proporção em massa de seus elementos, não importa como foi obtida."
+            }
+        ];
+    </script>
+
+    <!-- / Carregamento dos scripts base e lógica de autenticação/progresso -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="database.js"></script>
+    <script src="auth.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+
+
+
+
